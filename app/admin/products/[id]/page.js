@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { updateProduct, createVariant, updateVariant, deleteVariant, addProductImage, deleteProductImage } from '@/app/actions/products';
 import DeleteProductForm from '@/components/DeleteProductForm';
 import ToggleActiveButton from '@/components/ToggleActiveButton';
+import ClientForm from '@/components/ClientForm';
 
 const prisma = new PrismaClient();
 
@@ -47,7 +48,7 @@ export default async function EditProductPage(props) {
                 </h2>
                 <p style={{ color: '#6B7280', fontSize: '0.85rem', margin: '0 0 1.25rem' }}>Update the product name, description, or image.</p>
 
-                <form action={updateProduct.bind(null, product.id)} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <ClientForm action={updateProduct.bind(null, product.id)} successMessage="Product saved!" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                     <div>
                         <label style={{ display: 'block', marginBottom: '0.4rem', fontWeight: 600, fontSize: '0.88rem', color: '#374151' }}>Product Name</label>
                         <input type="text" name="name" defaultValue={product.name} required style={{ width: '100%', padding: '0.7rem 0.9rem', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '0.95rem', fontFamily: 'inherit' }} />
@@ -63,7 +64,7 @@ export default async function EditProductPage(props) {
                     <button type="submit" style={{ alignSelf: 'flex-start', padding: '0.65rem 1.5rem', backgroundColor: '#2B5E2E', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem', fontFamily: 'inherit' }}>
                         Save Changes
                     </button>
-                </form>
+                </ClientForm>
             </div>
 
             {/* ===== SECTION 2: Variants & Pricing ===== */}
@@ -104,18 +105,18 @@ export default async function EditProductPage(props) {
                             alignItems: 'center',
                             borderBottom: '1px solid #F3F4F6'
                         }}>
-                            <form action={updateVariant.bind(null, variant.id, product.id)} id={`update-${variant.id}`} style={{ display: 'contents' }}>
+                            <ClientForm action={updateVariant.bind(null, variant.id, product.id)} successMessage="Variant updated!" id={`update-${variant.id}`} style={{ display: 'contents' }}>
                                 <input type="text" name="size" defaultValue={variant.size} required placeholder="e.g. 250g" style={{ width: '100%', minWidth: 0, padding: '0.55rem 0.75rem', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '0.9rem', fontFamily: 'inherit' }} />
                                 <input type="number" name="price" defaultValue={variant.price} step="0.01" required placeholder="120" style={{ width: '100%', minWidth: 0, padding: '0.55rem 0.75rem', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '0.9rem', fontFamily: 'inherit' }} />
                                 <input type="number" name="discountPrice" defaultValue={variant.discountPrice || ''} step="0.01" placeholder="None" style={{ width: '100%', minWidth: 0, padding: '0.55rem 0.75rem', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '0.9rem', fontFamily: 'inherit' }} />
                                 <input type="number" name="stockQuantity" defaultValue={variant.stockQuantity} required style={{ width: '100%', minWidth: 0, padding: '0.55rem 0.75rem', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '0.9rem', fontFamily: 'inherit' }} />
                                 <button type="submit" style={{ padding: '0.5rem 0.85rem', background: '#EFF6FF', color: '#1D4ED8', border: '1px solid #BFDBFE', borderRadius: '6px', cursor: 'pointer', fontWeight: 600, fontSize: '0.8rem', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>Save</button>
-                            </form>
-                            <form action={deleteVariant.bind(null, variant.id, product.id)}>
+                            </ClientForm>
+                            <ClientForm action={deleteVariant.bind(null, variant.id, product.id)} successMessage="Variant deleted!">
                                 <button type="submit" style={{ padding: '0.5rem 0.65rem', background: '#FEF2F2', color: '#DC2626', border: '1px solid #FECACA', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontFamily: 'inherit', display: 'flex', alignItems: 'center' }}>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
                                 </button>
-                            </form>
+                            </ClientForm>
                         </div>
                     ))}
                     {product.variants.length === 0 && (
@@ -128,7 +129,7 @@ export default async function EditProductPage(props) {
                     <h3 style={{ fontSize: '0.95rem', fontWeight: 600, margin: '0 0 0.75rem', color: '#374151' }}>
                         + Add a New Pack Size
                     </h3>
-                    <form action={createVariant.bind(null, product.id)} style={{
+                    <ClientForm action={createVariant.bind(null, product.id)} successMessage="Variant added!" resetOnSuccess={true} style={{
                         display: 'grid',
                         gridTemplateColumns: '1.2fr 1fr 1.2fr 1fr auto',
                         gap: '0.75rem',
@@ -153,7 +154,7 @@ export default async function EditProductPage(props) {
                         <button type="submit" style={{ padding: '0.6rem 1.2rem', background: '#2B5E2E', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>
                             Add Variant
                         </button>
-                    </form>
+                    </ClientForm>
                 </div>
             </div>
 
@@ -173,11 +174,11 @@ export default async function EditProductPage(props) {
                         {product.images.map(img => (
                             <div key={img.id} style={{ position: 'relative', borderRadius: '10px', overflow: 'hidden', border: '1px solid #E5E7EB', aspectRatio: '1' }}>
                                 <img src={img.url} alt="Product" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                <form action={deleteProductImage.bind(null, img.id, product.id)} style={{ position: 'absolute', top: '6px', right: '6px' }}>
+                                <ClientForm action={deleteProductImage.bind(null, img.id, product.id)} successMessage="Image removed!" style={{ position: 'absolute', top: '6px', right: '6px' }}>
                                     <button type="submit" style={{ width: '26px', height: '26px', borderRadius: '50%', backgroundColor: 'rgba(220,38,38,0.9)', color: 'white', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem' }}>
                                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                                     </button>
-                                </form>
+                                </ClientForm>
                             </div>
                         ))}
                     </div>
@@ -185,7 +186,7 @@ export default async function EditProductPage(props) {
 
                 {/* Add Image */}
                 <div style={{ padding: '1rem', backgroundColor: '#F9FAFB', borderRadius: '10px', border: '1px dashed #D1D5DB' }}>
-                    <form action={addProductImage.bind(null, product.id)} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end' }}>
+                    <ClientForm action={addProductImage.bind(null, product.id)} successMessage="Image added!" resetOnSuccess={true} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end' }}>
                         <div style={{ flex: 1 }}>
                             <label style={{ display: 'block', fontSize: '0.78rem', color: '#6B7280', marginBottom: '0.3rem', fontWeight: 500 }}>Image Path</label>
                             <input type="text" name="url" required placeholder="/images/products/turmeric.jpg" style={{ width: '100%', padding: '0.55rem 0.75rem', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '0.9rem', fontFamily: 'inherit' }} />
@@ -193,7 +194,7 @@ export default async function EditProductPage(props) {
                         <button type="submit" style={{ padding: '0.6rem 1.2rem', background: '#2B5E2E', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>
                             Add Image
                         </button>
-                    </form>
+                    </ClientForm>
                 </div>
             </div>
         </div>

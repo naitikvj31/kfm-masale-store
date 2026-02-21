@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { createProduct } from '@/app/actions/products';
+import ClientForm from '@/components/ClientForm';
 
 export default function NewProductPage() {
     return (
@@ -14,7 +15,7 @@ export default function NewProductPage() {
             </div>
 
             <div style={{ background: 'white', borderRadius: '12px', padding: '2rem', border: '1px solid #E5E7EB' }}>
-                <form action={createProduct} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <ClientForm action={createProduct} successMessage="Product created successfully!" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                     <div>
                         <label style={{ display: 'block', marginBottom: '0.4rem', fontWeight: 600, fontSize: '0.88rem', color: '#374151' }}>Product Name *</label>
                         <input type="text" name="name" required placeholder="e.g. Garam Masala" style={{ width: '100%', padding: '0.7rem 0.9rem', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '0.95rem', fontFamily: 'inherit' }} />
@@ -43,7 +44,7 @@ export default function NewProductPage() {
                             Cancel
                         </Link>
                     </div>
-                </form>
+                </ClientForm>
             </div>
         </div>
     );

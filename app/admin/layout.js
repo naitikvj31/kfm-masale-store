@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { logout } from '@/app/actions/auth';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
     title: 'Admin Panel — KFM Masale',
@@ -32,6 +33,7 @@ const navItems = [
 export default function AdminLayout({ children }) {
     return (
         <>
+            <Toaster position="top-right" />
             <style>{`
                 .admin-wrapper {
                     display: flex;

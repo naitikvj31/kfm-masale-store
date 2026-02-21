@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { updateOrderStatus } from '@/app/actions/orders';
+import ClientForm from '@/components/ClientForm';
 
 const prisma = new PrismaClient();
 
@@ -79,7 +80,7 @@ export default async function OrdersPage() {
                                     </div>
 
                                     {/* Status Update */}
-                                    <form action={updateOrderStatus.bind(null, order.id)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <ClientForm action={updateOrderStatus.bind(null, order.id)} successMessage="Order status updated!" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                         <span style={{
                                             display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
                                             backgroundColor: sc.bg, color: sc.text,
@@ -104,7 +105,7 @@ export default async function OrdersPage() {
                                             border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600,
                                             fontSize: '0.8rem', fontFamily: 'inherit'
                                         }}>Update</button>
-                                    </form>
+                                    </ClientForm>
                                 </div>
 
                                 {/* Order Items & Address */}

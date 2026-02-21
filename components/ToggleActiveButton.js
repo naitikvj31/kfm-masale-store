@@ -1,10 +1,11 @@
 'use client';
 
 import { toggleProductActive } from '@/app/actions/products';
+import ClientForm from '@/components/ClientForm';
 
 export default function ToggleActiveButton({ productId, isActive }) {
     return (
-        <form action={toggleProductActive.bind(null, productId)}>
+        <ClientForm action={toggleProductActive.bind(null, productId)} successMessage={isActive ? "Product hidden from storefront." : "Product is now visible."}>
             <button type="submit" style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -27,6 +28,6 @@ export default function ToggleActiveButton({ productId, isActive }) {
                 }}></span>
                 {isActive ? 'Active' : 'Inactive'}
             </button>
-        </form>
+        </ClientForm>
     );
 }
