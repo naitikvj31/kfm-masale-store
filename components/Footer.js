@@ -139,7 +139,6 @@ export default function Footer() {
                             Customer Care
                         </h4>
                         <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
-                            <FooterLink href="/checkout" label="Track Order" />
                             <FooterLink href="/#products" label="Bulk Orders" />
                             <FooterLink href="https://wa.me/918875443482" label="WhatsApp Support" />
                         </ul>
