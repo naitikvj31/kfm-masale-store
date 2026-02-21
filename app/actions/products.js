@@ -13,10 +13,13 @@ export async function createProduct(formData) {
 
     if (!name) return { error: 'Name is required' };
 
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
     try {
         const product = await prisma.product.create({
             data: {
                 name,
+                slug,
                 description,
                 imageUrl,
             },
@@ -37,10 +40,12 @@ export async function updateProduct(id, formData) {
 
     if (!name) return { error: 'Name is required' };
 
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
     try {
         await prisma.product.update({
             where: { id: parseInt(id) },
-            data: { name, description, imageUrl },
+            data: { name, slug, description, imageUrl },
         });
 
         revalidatePath('/admin/products');
