@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 export async function generateMetadata(props) {
     const params = await props.params;
-    const product = await prisma.product.findUnique({ where: { id: parseInt(params.id) } });
+    const product = await prisma.product.findUnique({ where: { slug: params.slug } });
     if (!product) return { title: 'Product Not Found — KFM Masale' };
     return {
         title: `${product.name} — KFM Masale`,
@@ -24,10 +24,10 @@ export async function generateMetadata(props) {
 
 export default async function ProductDetailPage(props) {
     const params = await props.params;
-    const productId = parseInt(params.id);
+    const productSlug = params.slug;
 
     const product = await prisma.product.findUnique({
-        where: { id: productId },
+        where: { slug: productSlug },
         include: {
             variants: { orderBy: { price: 'asc' } },
             images: { orderBy: { sortOrder: 'asc' } }
@@ -39,7 +39,7 @@ export default async function ProductDetailPage(props) {
             <main className="container section" style={{ textAlign: 'center', minHeight: '50vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <h1 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-primary)' }}>Product Not Found</h1>
                 <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>The product you are looking for does not exist or has been removed.</p>
-                <Link href="/#products" className="btn btn-primary">Browse All Spices</Link>
+                <Link href="/shop" className="btn btn-primary">Browse All Spices</Link>
             </main>
         );
     }
@@ -53,7 +53,7 @@ export default async function ProductDetailPage(props) {
 
     // Fetch similar products (same category, excluding current)
     const similarProducts = await prisma.product.findMany({
-        where: { isActive: true, id: { not: productId } },
+        where: { isActive: true, slug: { not: productSlug } },
         include: {
             variants: { orderBy: { price: 'asc' } },
             images: { orderBy: { sortOrder: 'asc' }, take: 1 }
@@ -68,7 +68,7 @@ export default async function ProductDetailPage(props) {
                 <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
                     <Link href="/" style={{ color: 'var(--color-text-muted)' }}>Home</Link>
                     <span>/</span>
-                    <Link href="/#products" style={{ color: 'var(--color-text-muted)' }}>Spices</Link>
+                    <Link href="/shop" style={{ color: 'var(--color-text-muted)' }}>Spices</Link>
                     <span>/</span>
                     <span style={{ color: 'var(--color-text)', fontWeight: 500 }}>{product.name}</span>
                 </nav>

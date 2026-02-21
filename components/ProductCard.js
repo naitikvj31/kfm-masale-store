@@ -35,7 +35,7 @@ export default function ProductCard({ product }) {
     const hasDiscount = selectedVariant?.discountPrice && selectedVariant.discountPrice < originalPrice;
 
     return (
-        <Link href={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}>
+        <Link href={`/product/${product.slug}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}>
             <article style={{
                 background: 'white',
                 borderRadius: '16px',
