@@ -158,6 +158,18 @@ export default function Footer() {
                             Get in Touch
                         </h4>
                         <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.9rem', listStyle: 'none' }}>
+                            <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                                <div style={{
+                                    width: '32px', height: '32px', borderRadius: '8px',
+                                    backgroundColor: 'rgba(255,255,255,0.08)', display: 'flex',
+                                    alignItems: 'center', justifyContent: 'center', flexShrink: 0
+                                }}>
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                                </div>
+                                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', lineHeight: 1.5 }}>
+                                    Kamla flour mill, Teli mohalla,<br />Madanganj- kishangarh 305801
+                                </span>
+                            </li>
                             <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                                 <div style={{
                                     width: '32px', height: '32px', borderRadius: '8px',
