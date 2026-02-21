@@ -122,10 +122,6 @@ export default function AdminLoginPage() {
                         {loading ? 'Signing in...' : 'Sign In'}
                     </button>
                 </form>
-
-                <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.8rem', color: '#9CA3AF' }}>
-                    Default passcode: <code style={{ backgroundColor: '#F3F4F6', padding: '0.15rem 0.4rem', borderRadius: '4px', fontWeight: 600, color: '#374151' }}>kfm123</code>
-                </p>
             </div>
         </div>
     );

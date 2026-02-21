@@ -95,6 +95,7 @@ export async function createVariant(productId, formData) {
         });
 
         revalidatePath(`/admin/products/${productId}`);
+        revalidatePath('/');
         return { success: true };
     } catch (error) {
         return { error: 'Failed to create variant' };
@@ -128,6 +129,7 @@ export async function updateVariant(variantId, productId, formData) {
         });
 
         revalidatePath(`/admin/products/${productId}`);
+        revalidatePath('/');
         return { success: true };
     } catch (error) {
         return { error: 'Failed to update variant' };
@@ -140,6 +142,7 @@ export async function deleteVariant(variantId, productId) {
             where: { id: parseInt(variantId) },
         });
         revalidatePath(`/admin/products/${productId}`);
+        revalidatePath('/');
         return { success: true };
     } catch (error) {
         return { error: 'Failed to delete variant' };

@@ -60,10 +60,11 @@ export default function ProductCard({ product }) {
                 {/* Image Area */}
                 <div style={{
                     width: '100%',
-                    aspectRatio: '1 / 1',
+                    paddingBottom: '100%', /* Bulletproof 1:1 aspect ratio */
                     position: 'relative',
                     overflow: 'hidden',
                     background: firstImage ? '#F9FAFB' : 'linear-gradient(135deg, #E8F0E8 0%, #F5F0E8 100%)',
+                    flexShrink: 0
                 }}>
                     {firstImage ? (
                         <img
@@ -71,6 +72,9 @@ export default function ProductCard({ product }) {
                             alt={product.name}
                             loading="lazy"
                             style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
                                 width: '100%',
                                 height: '100%',
                                 objectFit: 'cover',
@@ -82,8 +86,8 @@ export default function ProductCard({ product }) {
                         />
                     ) : (
                         <div style={{
-                            width: '100%',
-                            height: '100%',
+                            position: 'absolute',
+                            top: 0, left: 0, right: 0, bottom: 0,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
