@@ -50,21 +50,36 @@ export default async function Home() {
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4rem' }}>
             {/* Text Content */}
             <div style={{ flex: '1 1 450px' }}>
-              <span className="animate-fade-in-up" style={{
-                display: 'inline-block',
-                backgroundColor: 'rgba(200,162,92,0.2)',
-                border: '1px solid rgba(200,162,92,0.4)',
-                color: 'var(--color-accent-light)',
-                padding: '0.4rem 1.25rem',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '0.8rem',
-                fontWeight: 600,
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-                marginBottom: '1.5rem'
-              }}>
-                100% Natural &bull; Farm Fresh
-              </span>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+                <span className="animate-fade-in-up" style={{
+                  display: 'inline-block',
+                  backgroundColor: 'rgba(200,162,92,0.2)',
+                  border: '1px solid rgba(200,162,92,0.4)',
+                  color: 'var(--color-accent-light)',
+                  padding: '0.4rem 1.25rem',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                }}>
+                  ✨ 50+ Years of Trust
+                </span>
+                <span className="animate-fade-in-up delay-1" style={{
+                  display: 'inline-block',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  padding: '0.4rem 1.25rem',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                }}>
+                  100% Natural &bull; Farm Fresh
+                </span>
+              </div>
 
               <h1 className="animate-fade-in-up" style={{
                 fontSize: 'clamp(2.5rem, 4.5vw, 3.75rem)',
@@ -149,7 +164,7 @@ export default async function Home() {
             <BenefitCard
               icon={<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>}
               title="Authentic Homemade"
-              description="Carefully crafted homemade spices, bringing you the authentic taste of tradition without any preservatives or additives."
+              description="Carefully crafted homemade spices, bringing you the authentic taste of a 50-year-old tradition (Since 1974) without any preservatives or additives."
             />
           </div>
         </div>
@@ -190,6 +205,10 @@ export default async function Home() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
             <span style={{ fontWeight: 600, color: 'var(--color-text)', fontSize: '0.95rem' }}>Free Delivery on Orders Above ₹1000</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <svg width="28" height="28" viewBox="0 2 20 20" fill="none" stroke="var(--color-primary)" strokeWidth="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+            <span style={{ fontWeight: 600, color: 'var(--color-text)', fontSize: '0.95rem' }}>Over 50 Years of Trust (Since 1974)</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>

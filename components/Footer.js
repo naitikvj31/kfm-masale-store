@@ -50,7 +50,7 @@ export default function Footer() {
                             </div>
                             <div>
                                 <div style={{ color: 'white', fontWeight: 700, fontFamily: 'var(--font-heading)', fontSize: '1.25rem' }}>KFM Masale</div>
-                                <div style={{ fontSize: '0.68rem', color: 'var(--color-accent)', textTransform: 'uppercase', letterSpacing: '2.5px', fontWeight: 600 }}>Pure &amp; Organic Since Generations</div>
+                                <div style={{ fontSize: '0.68rem', color: 'var(--color-accent)', textTransform: 'uppercase', letterSpacing: '2.5px', fontWeight: 600 }}>Over 50 Years of Trust</div>
                             </div>
                         </div>
                         <p style={{ lineHeight: 1.8, color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', maxWidth: '320px' }}>
