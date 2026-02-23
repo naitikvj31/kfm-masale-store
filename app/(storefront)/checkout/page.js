@@ -8,7 +8,7 @@ import { getSession } from '@/app/actions/auth';
 
 export default function CheckoutPage() {
     const router = useRouter();
-    const { cartItems, subtotalAmount, deliveryFee, totalAmount, clearCart } = useCart();
+    const { cartItems, subtotalAmount, deliveryFee, totalAmount, clearCart, promoCode, discountAmount } = useCart();
     const [paymentMethod, setPaymentMethod] = useState('cod');
     const [formData, setFormData] = useState({
         name: '', phone: '', email: '', address: ''
@@ -68,6 +68,9 @@ export default function CheckoutPage() {
             msg += `• ${item.product.name} (${item.variant.size}) × ${item.quantity} = ₹${(itemPrice * item.quantity).toFixed(0)}\n`;
         });
         msg += `\n📝 *Subtotal:* ₹${subtotalAmount.toFixed(0)}\n`;
+        if (discountAmount > 0) {
+            msg += `🏷️ *Promo (${promoCode}):* -₹${discountAmount.toFixed(0)}\n`;
+        }
         msg += `🚚 *Delivery Fee:* ${deliveryFee === 0 ? 'FREE' : '₹' + deliveryFee.toFixed(0)}\n`;
         msg += `💰 *Total Amount:* ₹${totalAmount.toFixed(0)}\n`;
         msg += `💳 *Payment:* ${paymentMethod === 'cod' ? 'Cash on Delivery' : 'UPI Payment'}\n`;
@@ -442,6 +445,18 @@ export default function CheckoutPage() {
                         <span style={{ fontWeight: 500, fontSize: '1rem', color: 'var(--color-text)' }}>Subtotal</span>
                         <span style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--color-text)' }}>₹{subtotalAmount.toFixed(0)}</span>
                     </div>
+
+                    {discountAmount > 0 && (
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginBottom: '1rem'
+                        }}>
+                            <span style={{ fontWeight: 500, fontSize: '1rem', color: 'var(--color-primary)' }}>Discount ({promoCode})</span>
+                            <span style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--color-primary)' }}>-₹{discountAmount.toFixed(0)}</span>
+                        </div>
+                    )}
 
                     <div style={{
                         display: 'flex',

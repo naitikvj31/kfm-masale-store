@@ -16,6 +16,7 @@
     "nodemailer": "^8.0.1",
     "qrcode": "^1.5.4",
     "react": "19.2.3",
+    "react-confetti": "^6.4.0",
     "react-dom": "19.2.3",
     "react-hot-toast": "^2.6.0"
   },

@@ -1,10 +1,27 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from './CartProvider';
 import Link from 'next/link';
 
 export default function CartDrawer() {
-    const { cartItems, isCartOpen, closeCart, updateQuantity, removeFromCart, subtotalAmount, deliveryFee, totalAmount } = useCart();
+    const {
+        cartItems, isCartOpen, closeCart, updateQuantity, removeFromCart,
+        subtotalAmount, deliveryFee, totalAmount,
+        promoCode, applyPromoCode, removePromoCode, discountAmount
+    } = useCart();
+
+    const [inputCode, setInputCode] = useState('');
+    const [promoMessage, setPromoMessage] = useState({ type: '', text: '' });
+
+    const handleApplyPromo = () => {
+        const result = applyPromoCode(inputCode);
+        setPromoMessage({
+            type: result.success ? 'success' : 'error',
+            text: result.message
+        });
+        if (result.success) setInputCode('');
+    };
 
     if (!isCartOpen) return null;
 
@@ -163,10 +180,66 @@ export default function CartDrawer() {
                         borderTop: '1px solid var(--color-border-light)',
                         backgroundColor: 'var(--color-bg-subtle)'
                     }}>
+                        {/* Promo Code Section */}
+                        <div style={{ marginBottom: '1.25rem' }}>
+                            {promoCode ? (
+                                <div style={{
+                                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                                    backgroundColor: '#DEF7EC', padding: '0.75rem', borderRadius: 'var(--radius-sm)',
+                                    border: '1px dashed #31C48D'
+                                }}>
+                                    <div>
+                                        <span style={{ fontSize: '0.85rem', color: '#03543F', fontWeight: 600 }}>Code Applied: {promoCode}</span>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--color-primary)' }}>-₹{discountAmount} (15% OFF)</div>
+                                    </div>
+                                    <button
+                                        onClick={() => { removePromoCode(); setPromoMessage({ type: '', text: '' }); }}
+                                        style={{ background: 'none', border: 'none', color: '#9B1C1C', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 500 }}
+                                    >Remove</button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        <input
+                                            type="text"
+                                            placeholder="Enter promo code"
+                                            value={inputCode}
+                                            onChange={(e) => setInputCode(e.target.value)}
+                                            style={{
+                                                flex: 1, padding: '0.6rem', border: '1px solid var(--color-border)',
+                                                borderRadius: 'var(--radius-sm)', fontSize: '0.9rem', outline: 'none'
+                                            }}
+                                        />
+                                        <button
+                                            onClick={handleApplyPromo}
+                                            style={{
+                                                padding: '0 1rem', background: '#111827', color: 'white', border: 'none',
+                                                borderRadius: 'var(--radius-sm)', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem'
+                                            }}
+                                        >Apply</button>
+                                    </div>
+                                    {promoMessage.text && (
+                                        <div style={{
+                                            marginTop: '0.5rem', fontSize: '0.8rem',
+                                            color: promoMessage.type === 'error' ? '#9B1C1C' : '#03543F'
+                                        }}>
+                                            {promoMessage.text}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                             <span style={{ fontWeight: 500, color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>Subtotal</span>
                             <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>₹{subtotalAmount}</span>
                         </div>
+                        {discountAmount > 0 && (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                                <span style={{ fontWeight: 500, color: 'var(--color-primary)', fontSize: '0.9rem' }}>Discount</span>
+                                <span style={{ fontWeight: 600, color: 'var(--color-primary)' }}>-₹{discountAmount}</span>
+                            </div>
+                        )}
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                             <span style={{ fontWeight: 500, color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>Delivery Fee</span>
                             <span style={{ fontWeight: 600, color: deliveryFee === 0 ? 'var(--color-primary)' : 'var(--color-text)' }}>

@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import ProductCard from '@/components/ProductCard';
 import BenefitCard from '@/components/BenefitCard';
+import HoliEffect from '@/components/HoliEffect';
 
 const prisma = new PrismaClient();
 
@@ -32,6 +33,7 @@ export default async function Home() {
 
   return (
     <main>
+      <HoliEffect />
       {/* ===== HERO SECTION ===== */}
       <section className="hero-section" style={{
         background: 'linear-gradient(135deg, #1A3D1C 0%, #2B5E2E 50%, #3D8B40 100%)',
