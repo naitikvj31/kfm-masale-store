@@ -1,5 +1,6 @@
 import { getSession } from '@/app/actions/auth';
 import { PrismaClient } from '@prisma/client';
+import Link from 'next/link';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +18,11 @@ export default async function OrdersPage() {
                 include: {
                     variant: {
                         include: {
-                            product: true
+                            product: {
+                                include: {
+                                    images: true
+                                }
+                            }
                         }
                     }
                 }
@@ -56,7 +61,7 @@ export default async function OrdersPage() {
                             backgroundColor: 'white'
                         }}>
                             {/* Order Header (Amazon style) */}
-                            <div style={{
+                            <Link href={`/profile/orders/${order.id}`} style={{
                                 backgroundColor: 'var(--color-bg-subtle)',
                                 padding: '1rem 1.5rem',
                                 borderBottom: '1px solid var(--color-border)',
@@ -66,7 +71,9 @@ export default async function OrdersPage() {
                                 justifyContent: 'space-between',
                                 gap: '1rem',
                                 fontSize: '0.85rem',
-                                color: 'var(--color-text-muted)'
+                                color: 'var(--color-text-muted)',
+                                textDecoration: 'none',
+                                transition: 'background-color 0.2s'
                             }}>
                                 <div style={{ display: 'flex', gap: '2rem' }}>
                                     <div>
@@ -88,9 +95,9 @@ export default async function OrdersPage() {
                                 </div>
                                 <div>
                                     <div style={{ textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.2rem', textAlign: 'right' }}>Order #</div>
-                                    <div style={{ color: 'var(--color-text)', fontWeight: 500 }}>KFM-ORD-{order.id}</div>
+                                    <div style={{ color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'underline' }}>KFM-ORD-{order.id}</div>
                                 </div>
-                            </div>
+                            </Link>
 
                             {/* Order Items */}
                             <div style={{ padding: '1.5rem' }}>
@@ -124,7 +131,7 @@ export default async function OrdersPage() {
                                                 backgroundColor: 'white'
                                             }}>
                                                 <img
-                                                    src={item.variant.product.imageUrl || 'https://via.placeholder.com/90'}
+                                                    src={item.variant.product.images?.[0]?.url || item.variant.product.imageUrl || 'https://via.placeholder.com/90'}
                                                     alt={item.variant.product.name}
                                                     style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                                                 />
@@ -155,10 +162,7 @@ export default async function OrdersPage() {
                                                     transition: 'all 0.2s',
                                                     backgroundColor: 'white',
                                                     color: 'var(--color-text)'
-                                                }}
-                                                    onMouseOver={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-bg-subtle)'; }}
-                                                    onMouseOut={(e) => { e.currentTarget.style.backgroundColor = 'white'; }}
-                                                >
+                                                }}>
                                                     Buy it again
                                                 </a>
                                             </div>

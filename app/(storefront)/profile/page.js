@@ -65,7 +65,7 @@ export default async function ProfilePage() {
                                 style={{ padding: '0.6rem 0.8rem' }}
                             />
                         </div>
-                        <button type="button" className="btn btn-outline" style={{ padding: '0.6rem', marginTop: '0.5rem', fontSize: '0.9rem' }} onClick={() => alert("Password change simulated for static account.")}>
+                        <button type="button" className="btn btn-outline" style={{ padding: '0.6rem', marginTop: '0.5rem', fontSize: '0.9rem' }}>
                             Update Password
                         </button>
                     </form>

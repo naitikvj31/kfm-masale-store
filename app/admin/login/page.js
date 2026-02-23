@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/app/actions/auth';
+import { loginClient as login } from '@/app/actions/auth';
 
 export default function AdminLoginPage() {
     const [error, setError] = useState('');

@@ -119,25 +119,6 @@ export default function Navbar() {
 
                 {/* Action Buttons */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    {/* Account Button */}
-                    <Link
-                        href="/profile"
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: 'var(--radius-full)',
-                            backgroundColor: 'white',
-                            color: 'var(--color-primary)',
-                            border: '1.5px solid var(--color-border)',
-                            transition: 'all var(--transition-fast)'
-                        }}
-                    >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                    </Link>
-
                     {/* Cart Button */}
                     <button
                         onClick={toggleCart}
@@ -180,6 +161,25 @@ export default function Navbar() {
                             </span>
                         )}
                     </button>
+
+                    {/* Account Button */}
+                    <Link
+                        href="/profile"
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: 'var(--radius-full)',
+                            backgroundColor: 'white',
+                            color: 'var(--color-primary)',
+                            border: '1.5px solid var(--color-border)',
+                            transition: 'all var(--transition-fast)'
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                    </Link>
                 </div>
             </div>
 

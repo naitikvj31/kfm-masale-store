@@ -22,8 +22,11 @@ export default function LoginPage() {
             setError(res.error);
             setIsLoading(false);
         } else {
-            // Success! Redirect to profile
-            router.push('/profile');
+            // Success! See if they came from checkout
+            const params = new URLSearchParams(window.location.search);
+            const redirectUrl = params.get('redirect') || '/profile';
+
+            router.push(redirectUrl);
             router.refresh();
         }
     }
@@ -40,6 +43,13 @@ export default function LoginPage() {
                 border: '1px solid var(--color-border-light)'
             }}>
                 <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                    <div style={{
+                        width: '70px', height: '70px', borderRadius: '50%', overflow: 'hidden',
+                        margin: '0 auto 1.5rem', border: '1px solid var(--color-border-light)',
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
+                    }}>
+                        <img src="/images/products/logokfm.jpg" alt="KFM Masale" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
                     <h1 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-primary)', fontSize: '2.2rem', marginBottom: '0.5rem' }}>
                         Welcome Back
                     </h1>

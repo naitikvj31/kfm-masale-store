@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { logout } from '@/app/actions/auth';
+import { logoutClient as logout } from '@/app/actions/auth';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata = {

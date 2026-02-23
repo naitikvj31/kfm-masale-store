@@ -35,7 +35,8 @@ export async function decrypt(input) {
 
 // 2. Session Management
 export async function getSession() {
-    const session = cookies().get('kfm_consumer_session')?.value;
+    const cookieStore = await cookies();
+    const session = cookieStore.get('kfm_consumer_session')?.value;
     if (!session) return null;
     return await decrypt(session);
 }
@@ -59,7 +60,8 @@ export async function loginClient(formData) {
         };
         const token = await encrypt(sessionPayload);
 
-        cookies().set('kfm_consumer_session', token, {
+        const cookieStore = await cookies();
+        cookieStore.set('kfm_consumer_session', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
@@ -93,7 +95,8 @@ export async function signupClient(formData) {
     };
     const token = await encrypt(sessionPayload);
 
-    cookies().set('kfm_consumer_session', token, {
+    const cookieStore = await cookies();
+    cookieStore.set('kfm_consumer_session', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
@@ -106,6 +109,7 @@ export async function signupClient(formData) {
 
 // 5. Logout Action
 export async function logoutClient() {
-    cookies().delete('kfm_consumer_session');
+    const cookieStore = await cookies();
+    cookieStore.delete('kfm_consumer_session');
     redirect('/login');
 }

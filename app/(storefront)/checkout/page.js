@@ -3,8 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '@/components/CartProvider';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { getSession } from '@/app/actions/auth';
 
 export default function CheckoutPage() {
+    const router = useRouter();
     const { cartItems, subtotalAmount, deliveryFee, totalAmount, clearCart } = useCart();
     const [paymentMethod, setPaymentMethod] = useState('cod');
     const [formData, setFormData] = useState({
@@ -14,11 +17,40 @@ export default function CheckoutPage() {
     const [orderId, setOrderId] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
+    const [isLoadingAuth, setIsLoadingAuth] = useState(true);
 
     useEffect(() => {
         // Detect if user is on desktop to conditionally show QR vs Button
         setIsDesktop(window.innerWidth > 768);
-    }, []);
+
+        // Fetch session to protect checkout route
+        getSession().then(session => {
+            if (!session) {
+                router.push('/login?redirect=/checkout');
+            } else {
+                setFormData(prev => ({
+                    ...prev,
+                    name: session.name || '',
+                    email: session.email || ''
+                }));
+                setIsLoadingAuth(false);
+            }
+        });
+    }, [router]);
+
+    if (isLoadingAuth) {
+        return (
+            <main className="container section" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ textAlign: 'center', color: 'var(--color-primary)' }}>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1s linear infinite', margin: '0 auto 1rem' }}>
+                        <line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                    </svg>
+                    <p style={{ fontWeight: 500 }}>Securing checkout...</p>
+                    <style dangerouslySetInnerHTML={{ __html: `@keyframes spin { 100% { transform: rotate(360deg); } }` }} />
+                </div>
+            </main>
+        );
+    }
 
     function handleChange(e) {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useCart } from './CartProvider';
 
 export default function ProductCard({ product }) {
-    const { addToCart, openCart } = useCart();
+    const { addToCart } = useCart();
     const firstImage = product.images?.[0]?.url || product.imageUrl || null;
     const variants = product.variants || [];
 
@@ -301,7 +301,6 @@ export default function ProductCard({ product }) {
                                 e.stopPropagation();
                                 if (!isOutOfStock && selectedVariant) {
                                     addToCart(product, selectedVariant);
-                                    openCart();
                                 }
                             }}
                             style={{
