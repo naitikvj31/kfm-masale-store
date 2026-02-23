@@ -3,11 +3,17 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useCart } from './CartProvider';
+import StarRating from './StarRating';
 
 export default function ProductCard({ product }) {
     const { addToCart } = useCart();
     const firstImage = product.images?.[0]?.url || product.imageUrl || null;
     const variants = product.variants || [];
+    const reviews = product.reviews || [];
+
+    // Calculate rating
+    const totalReviews = reviews.length;
+    const averageRating = totalReviews > 0 ? (reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews) : 0;
 
     // Sort variants by price
     const sortedVariants = [...variants].sort((a, b) => a.price - b.price);
@@ -214,6 +220,12 @@ export default function ProductCard({ product }) {
                     }}>
                         {product.name}
                     </h3>
+
+                    {totalReviews > 0 && (
+                        <div style={{ marginBottom: '0.5rem', pointerEvents: 'none' }}>
+                            <StarRating rating={averageRating} count={totalReviews} size={14} />
+                        </div>
+                    )}
 
                     {product.description && (
                         <p style={{

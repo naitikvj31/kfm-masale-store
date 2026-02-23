@@ -3,6 +3,9 @@ import Link from 'next/link';
 import ImageGallery from '@/components/ImageGallery';
 import AddToCartSection from '@/components/AddToCartSection';
 import ProductCard from '@/components/ProductCard';
+import ProductReviews from '@/components/ProductReviews';
+import StarRating from '@/components/StarRating';
+import { getSession } from '@/app/actions/auth';
 
 const prisma = new PrismaClient();
 
@@ -30,7 +33,12 @@ export default async function ProductDetailPage(props) {
         where: { slug: productSlug },
         include: {
             variants: { orderBy: { price: 'asc' } },
-            images: { orderBy: { sortOrder: 'asc' } }
+            images: { orderBy: { sortOrder: 'asc' } },
+            reviews: {
+                include: { user: { select: { name: true } } },
+                orderBy: { createdAt: 'desc' },
+                where: { isApproved: true }
+            }
         }
     });
 
@@ -56,10 +64,29 @@ export default async function ProductDetailPage(props) {
         where: { isActive: true, slug: { not: productSlug } },
         include: {
             variants: { orderBy: { price: 'asc' } },
-            images: { orderBy: { sortOrder: 'asc' }, take: 1 }
+            images: { orderBy: { sortOrder: 'asc' }, take: 1 },
+            reviews: { select: { rating: true } }
         },
         take: 4
     });
+
+    const session = await getSession();
+    let hasPurchased = false;
+    if (session) {
+        const pastOrder = await prisma.orderItem.findFirst({
+            where: {
+                variant: { productId: product.id },
+                order: {
+                    userId: session.id,
+                    status: { in: ['Delivered', 'Shipped', 'Processing', 'Pending'] }
+                }
+            }
+        });
+        hasPurchased = !!pastOrder;
+    }
+
+    const totalReviews = product.reviews?.length || 0;
+    const averageRating = totalReviews > 0 ? (product.reviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews) : 0;
 
     return (
         <main>
@@ -106,11 +133,15 @@ export default async function ProductDetailPage(props) {
                             fontFamily: 'var(--font-heading)',
                             fontSize: '2rem',
                             color: 'var(--color-text)',
-                            marginBottom: '1rem',
+                            marginBottom: '0.5rem',
                             lineHeight: 1.3
                         }}>
                             {product.name}
                         </h1>
+
+                        <div style={{ marginBottom: '1.25rem' }}>
+                            <StarRating rating={averageRating} count={totalReviews} size={18} />
+                        </div>
 
                         {product.description && (
                             <p style={{
@@ -150,6 +181,13 @@ export default async function ProductDetailPage(props) {
                         <AddToCartSection product={product} />
                     </div>
                 </div>
+
+                {/* Reviews Section */}
+                <ProductReviews
+                    productId={product.id}
+                    reviews={product.reviews || []}
+                    canReview={hasPurchased}
+                />
             </section>
 
             {/* Similar Products */}

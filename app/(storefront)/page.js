@@ -27,7 +27,8 @@ export default async function Home() {
       images: {
         orderBy: { sortOrder: 'asc' },
         take: 1
-      }
+      },
+      reviews: { select: { rating: true }, where: { isApproved: true } }
     }
   });
 
