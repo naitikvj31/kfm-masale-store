@@ -107,63 +107,71 @@ export default function ProductCard({ product }) {
                         top: '12px',
                         left: '12px',
                         display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
                         gap: '0.4rem',
-                        flexWrap: 'wrap',
-                        maxWidth: 'calc(100% - 24px)'
+                        zIndex: 10
                     }}>
-                        <span style={{
-                            backgroundColor: 'rgba(43, 94, 46, 0.92)',
-                            color: 'white',
-                            padding: '0.3rem 0.75rem',
-                            borderRadius: '8px',
-                            fontSize: '0.7rem',
-                            fontWeight: 700,
-                            letterSpacing: '0.8px',
-                            textTransform: 'uppercase',
-                            backdropFilter: 'blur(4px)'
-                        }}>
-                            Organic
-                        </span>
-                        {maxDiscountPercent > 0 && (
+                        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
                             <span style={{
-                                backgroundColor: 'var(--color-warm)',
+                                backgroundColor: 'rgba(43, 94, 46, 0.92)',
                                 color: 'white',
-                                padding: '0.3rem 0.75rem',
-                                borderRadius: '8px',
-                                fontSize: '0.7rem',
+                                padding: '0.25rem 0.6rem',
+                                borderRadius: '6px',
+                                fontSize: '0.65rem',
                                 fontWeight: 700,
                                 letterSpacing: '0.5px',
-                                boxShadow: 'var(--shadow-sm)'
+                                textTransform: 'uppercase',
+                                backdropFilter: 'blur(4px)'
                             }}>
-                                {maxDiscountPercent}% OFF
+                                Organic
                             </span>
-                        )}
+                            {maxDiscountPercent > 0 && (
+                                <span style={{
+                                    backgroundColor: 'var(--color-warm)',
+                                    color: 'white',
+                                    padding: '0.25rem 0.6rem',
+                                    borderRadius: '6px',
+                                    fontSize: '0.65rem',
+                                    fontWeight: 700,
+                                    letterSpacing: '0.5px',
+                                    boxShadow: 'var(--shadow-sm)'
+                                }}>
+                                    {maxDiscountPercent}% OFF
+                                </span>
+                            )}
+                        </div>
+
                         {product.isHotSeller && (
-                            <span style={{
+                            <span className="animate-badge-pulse" style={{
                                 backgroundColor: '#EF4444',
                                 color: 'white',
-                                padding: '0.3rem 0.75rem',
-                                borderRadius: '8px',
-                                fontSize: '0.7rem',
+                                padding: '0.3rem 0.6rem',
+                                borderRadius: '6px',
+                                fontSize: '0.65rem',
                                 fontWeight: 800,
                                 letterSpacing: '0.5px',
                                 textTransform: 'uppercase',
-                                boxShadow: '0 2px 4px rgba(239,68,68,0.3)'
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.2rem'
                             }}>
-                                🔥 Hot Seller
+                                🔥 Best Seller
                             </span>
                         )}
                         {product.isNewArrival && (
-                            <span style={{
-                                backgroundColor: '#3B82F6',
+                            <span className="animate-badge-shine" style={{
                                 color: 'white',
-                                padding: '0.3rem 0.75rem',
-                                borderRadius: '8px',
-                                fontSize: '0.7rem',
+                                padding: '0.3rem 0.6rem',
+                                borderRadius: '6px',
+                                fontSize: '0.65rem',
                                 fontWeight: 800,
                                 letterSpacing: '0.5px',
                                 textTransform: 'uppercase',
-                                boxShadow: '0 2px 4px rgba(59,130,246,0.3)'
+                                boxShadow: '0 2px 4px rgba(59,130,246,0.3)',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.2rem'
                             }}>
                                 🌟 New Arrival
                             </span>

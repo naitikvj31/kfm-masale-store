@@ -509,6 +509,7 @@ button {
     display: none !important;
   }
 }
+
 /* Promotional Banner Hover Effect */
 .promo-image-container {
   transform: rotate(2deg);
@@ -518,4 +519,42 @@ button {
 .promo-image-container:hover {
   transform: rotate(0deg) scale(1.02);
   box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== BADGE ANIMATIONS ===== */
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes badgeShine {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-badge-pulse {
+  animation: badgePulse 2s infinite ease-in-out;
+}
+
+.animate-badge-shine {
+  background: linear-gradient(90deg, #3B82F6 25%, #60A5FA 50%, #3B82F6 75%);
+  background-size: 200% auto;
+  animation: badgeShine 3s infinite linear;
 }
