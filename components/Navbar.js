@@ -117,48 +117,70 @@ export default function Navbar() {
                     </ul>
                 </nav>
 
-                {/* Cart Button */}
-                <button
-                    onClick={toggleCart}
-                    aria-label={`Shopping cart with ${isMounted ? totalItems : 0} items`}
-                    style={{
-                        background: 'none',
-                        border: '1.5px solid var(--color-border)',
-                        borderRadius: 'var(--radius-md)',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '0.5rem 0.85rem',
-                        fontSize: '0.9rem',
-                        color: 'var(--color-text)',
-                        fontWeight: 500,
-                        transition: 'all var(--transition-fast)'
-                    }}
-                >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                    </svg>
-                    <span className="hide-mobile">Cart</span>
-                    {isMounted && totalItems > 0 && (
-                        <span style={{
-                            backgroundColor: 'var(--color-primary)',
-                            color: 'white',
-                            borderRadius: 'var(--radius-full)',
-                            minWidth: '22px',
-                            height: '22px',
-                            display: 'inline-flex',
+                {/* Action Buttons */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    {/* Account Button */}
+                    <Link
+                        href="/profile"
+                        style={{
+                            display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontSize: '0.75rem',
-                            fontWeight: 700,
-                            padding: '0 6px'
-                        }}>
-                            {totalItems}
-                        </span>
-                    )}
-                </button>
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: 'var(--radius-full)',
+                            backgroundColor: 'white',
+                            color: 'var(--color-primary)',
+                            border: '1.5px solid var(--color-border)',
+                            transition: 'all var(--transition-fast)'
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                    </Link>
+
+                    {/* Cart Button */}
+                    <button
+                        onClick={toggleCart}
+                        aria-label={`Shopping cart with ${isMounted ? totalItems : 0} items`}
+                        style={{
+                            background: 'white',
+                            border: '1.5px solid var(--color-border)',
+                            borderRadius: 'var(--radius-full)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            padding: '0.5rem 0.85rem',
+                            fontSize: '0.9rem',
+                            color: 'var(--color-text)',
+                            fontWeight: 600,
+                            transition: 'all var(--transition-fast)'
+                        }}
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                        <span className="hide-mobile">Cart</span>
+                        {isMounted && totalItems > 0 && (
+                            <span style={{
+                                backgroundColor: 'var(--color-primary)',
+                                color: 'white',
+                                borderRadius: 'var(--radius-full)',
+                                minWidth: '22px',
+                                height: '22px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '0.75rem',
+                                fontWeight: 700,
+                                padding: '0 6px'
+                            }}>
+                                {totalItems}
+                            </span>
+                        )}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Dropdown Menu */}
