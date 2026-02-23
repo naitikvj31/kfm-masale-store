@@ -148,6 +148,41 @@ export async function signupClient(formData) {
     }
 }
 
+export async function verifyEmailClient(token) {
+    if (!token) return { error: "Verification token is missing." };
+
+    try {
+        const verificationToken = await prisma.verificationToken.findFirst({
+            where: { token, type: 'VERIFY_EMAIL' }
+        });
+
+        if (!verificationToken) {
+            return { error: "Invalid or expired token." };
+        }
+
+        if (new Date() > verificationToken.expiresAt) {
+            return { error: "This verification link has expired. Please sign up again or request a new link." };
+        }
+
+        // Successfully found token, verify the user
+        await prisma.user.update({
+            where: { email: verificationToken.email },
+            data: { isVerified: true }
+        });
+
+        // Delete the used token
+        await prisma.verificationToken.delete({
+            where: { id: verificationToken.id }
+        });
+
+        return { success: true, message: "Email verified successfully! You can now log in." };
+
+    } catch (e) {
+        console.error("Verification error:", e);
+        return { error: "An error occurred during verification. Please try again." };
+    }
+}
+
 export async function logoutClient() {
     const cookieStore = await cookies();
     cookieStore.delete('kfm_consumer_session');
