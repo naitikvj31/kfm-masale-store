@@ -31,7 +31,7 @@ export default function Footer() {
                 {/* Main Footer Content */}
                 <div className="container" style={{
                     display: 'grid',
-                    gridTemplateColumns: '1.5fr 1fr 1fr 1.2fr',
+                    gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1.2fr',
                     gap: '2.5rem',
                     padding: '3.5rem 1.5rem 2.5rem'
                 }}>
@@ -141,6 +141,27 @@ export default function Footer() {
                         <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
                             <FooterLink href="/#products" label="Bulk Orders" />
                             <FooterLink href="https://wa.me/918875443482" label="WhatsApp Support" />
+                        </ul>
+                    </div>
+
+                    {/* Legal */}
+                    <div>
+                        <h4 style={{
+                            color: 'var(--color-accent)',
+                            fontSize: '0.78rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            marginBottom: '1.25rem',
+                            fontWeight: 700,
+                            fontFamily: 'var(--font-body)'
+                        }}>
+                            Legal
+                        </h4>
+                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                            <FooterLink href="/privacy-policy" label="Privacy Policy" />
+                            <FooterLink href="/terms-and-conditions" label="Terms & Conditions" />
+                            <FooterLink href="/refund-policy" label="Refund & Returns" />
+                            <FooterLink href="/shipping-policy" label="Shipping Policy" />
                         </ul>
                     </div>
 

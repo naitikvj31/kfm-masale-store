@@ -108,7 +108,8 @@ export default function ProductCard({ product }) {
                         left: '12px',
                         display: 'flex',
                         gap: '0.4rem',
-                        flexWrap: 'wrap'
+                        flexWrap: 'wrap',
+                        maxWidth: 'calc(100% - 24px)'
                     }}>
                         <span style={{
                             backgroundColor: 'rgba(43, 94, 46, 0.92)',
@@ -135,6 +136,36 @@ export default function ProductCard({ product }) {
                                 boxShadow: 'var(--shadow-sm)'
                             }}>
                                 {maxDiscountPercent}% OFF
+                            </span>
+                        )}
+                        {product.isHotSeller && (
+                            <span style={{
+                                backgroundColor: '#EF4444',
+                                color: 'white',
+                                padding: '0.3rem 0.75rem',
+                                borderRadius: '8px',
+                                fontSize: '0.7rem',
+                                fontWeight: 800,
+                                letterSpacing: '0.5px',
+                                textTransform: 'uppercase',
+                                boxShadow: '0 2px 4px rgba(239,68,68,0.3)'
+                            }}>
+                                🔥 Hot Seller
+                            </span>
+                        )}
+                        {product.isNewArrival && (
+                            <span style={{
+                                backgroundColor: '#3B82F6',
+                                color: 'white',
+                                padding: '0.3rem 0.75rem',
+                                borderRadius: '8px',
+                                fontSize: '0.7rem',
+                                fontWeight: 800,
+                                letterSpacing: '0.5px',
+                                textTransform: 'uppercase',
+                                boxShadow: '0 2px 4px rgba(59,130,246,0.3)'
+                            }}>
+                                🌟 New Arrival
                             </span>
                         )}
                     </div>

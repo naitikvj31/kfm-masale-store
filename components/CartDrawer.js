@@ -4,7 +4,7 @@ import { useCart } from './CartProvider';
 import Link from 'next/link';
 
 export default function CartDrawer() {
-    const { cartItems, isCartOpen, closeCart, updateQuantity, removeFromCart, totalAmount } = useCart();
+    const { cartItems, isCartOpen, closeCart, updateQuantity, removeFromCart, subtotalAmount, deliveryFee, totalAmount } = useCart();
 
     if (!isCartOpen) return null;
 
@@ -163,8 +163,18 @@ export default function CartDrawer() {
                         borderTop: '1px solid var(--color-border-light)',
                         backgroundColor: 'var(--color-bg-subtle)'
                     }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                            <span style={{ fontWeight: 600, color: 'var(--color-text-muted)' }}>Subtotal</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                            <span style={{ fontWeight: 500, color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>Subtotal</span>
+                            <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>₹{subtotalAmount}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                            <span style={{ fontWeight: 500, color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>Delivery Fee</span>
+                            <span style={{ fontWeight: 600, color: deliveryFee === 0 ? 'var(--color-primary)' : 'var(--color-text)' }}>
+                                {deliveryFee === 0 ? 'FREE' : `₹${deliveryFee}`}
+                            </span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem', borderTop: '1px dashed var(--color-border)', paddingTop: '1rem' }}>
+                            <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>Total</span>
                             <span style={{ fontWeight: 700, fontSize: '1.15rem', color: 'var(--color-primary)' }}>₹{totalAmount}</span>
                         </div>
                         <Link
