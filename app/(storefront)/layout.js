@@ -4,10 +4,12 @@ import { CartProvider } from '@/components/CartProvider';
 import CartDrawer from '@/components/CartDrawer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import AnnouncementBar from '@/components/AnnouncementBar';
+import { Toaster } from 'react-hot-toast';
 
 export default function StorefrontLayout({ children }) {
     return (
         <CartProvider>
+            <Toaster position="top-right" />
             <AnnouncementBar />
             <Navbar />
             <CartDrawer />

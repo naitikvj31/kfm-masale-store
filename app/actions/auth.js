@@ -105,6 +105,9 @@ export async function signupClient(formData) {
     }
 
     try {
+        console.log("--- SIGNUP START ---");
+        console.log("Prisma keys available:", prisma ? Object.keys(prisma).filter(k => k.startsWith('user') || !k.startsWith('$')) : "prisma is undefined");
+
         // Check if user already exists
         const existingUser = await prisma.user.findUnique({ where: { email } });
         if (existingUser) {
