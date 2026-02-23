@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { loginClient } from '@/app/actions/auth';
+import { toast } from 'react-hot-toast';
 
 export default function LoginPage() {
     const router = useRouter();
@@ -15,19 +16,29 @@ export default function LoginPage() {
         setError('');
         setIsLoading(true);
 
-        const formData = new FormData(e.target);
-        const res = await loginClient(formData);
+        try {
+            const formData = new FormData(e.target);
 
-        if (res.error) {
-            setError(res.error);
+            toast.loading('Signing in...', { id: 'login' });
+            const res = await loginClient(formData);
+            toast.dismiss('login');
+
+            if (res.error) {
+                toast.error(res.error, { duration: 5000 });
+            } else { // Assuming success if no error
+                toast.success('Welcome back!');
+                // Success! See if they came from checkout
+                const params = new URLSearchParams(window.location.search);
+                const redirectUrl = params.get('redirect') || '/profile';
+
+                router.push(redirectUrl);
+                router.refresh();
+            }
+        } catch (err) {
+            toast.dismiss('login');
+            toast.error("A network error occurred. Please try again.");
+        } finally {
             setIsLoading(false);
-        } else {
-            // Success! See if they came from checkout
-            const params = new URLSearchParams(window.location.search);
-            const redirectUrl = params.get('redirect') || '/profile';
-
-            router.push(redirectUrl);
-            router.refresh();
         }
     }
 
@@ -57,21 +68,6 @@ export default function LoginPage() {
                         Sign in to manage your orders and profile.
                     </p>
                 </div>
-
-                {error && (
-                    <div style={{
-                        backgroundColor: '#FEF2F2',
-                        color: '#991B1B',
-                        padding: '0.85rem',
-                        borderRadius: '8px',
-                        marginBottom: '1.5rem',
-                        fontSize: '0.9rem',
-                        textAlign: 'center',
-                        border: '1px solid #FCA5A5'
-                    }}>
-                        {error}
-                    </div>
-                )}
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                     <div className="form-group">

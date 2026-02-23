@@ -19,6 +19,7 @@ model Product {
   sortOrder    Int            @default(0)
   variants     Variant[]
   images       ProductImage[]
+  reviews      Review[]       // New: Products can have reviews
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 }
@@ -43,6 +44,8 @@ model Variant {
 
 model Order {
   id              Int         @id @default(autoincrement())
+  userId          Int?        // Optional, links to the registered User
+  user            User?       @relation(fields: [userId], references: [id])
   customerName    String
   customerEmail   String?
   customerPhone   String
@@ -62,4 +65,42 @@ model OrderItem {
   variant   Variant @relation(fields: [variantId], references: [id])
   quantity  Int     @default(1)
   price     Float   // Price per unit at time of purchase
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  name          String
+  email         String    @unique
+  password      String    // Hashed with bcrypt
+  role          String    @default("CUSTOMER") // ADMIN, CUSTOMER
+  isVerified    Boolean   @default(false)
+  orders        Order[]   // Links to their purchase history
+  reviews       Review[]  // Links to reviews they posted
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model VerificationToken {
+  id        Int      @id @default(autoincrement())
+  email     String
+  token     String   @unique
+  type      String   // "VERIFY_EMAIL", "RESET_PASSWORD"
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating    Int      // 1 to 5 stars
+  title     String?  // Optional review title
+  comment   String   @db.Text
+  isApproved Boolean @default(true) // Admin moderation capability
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

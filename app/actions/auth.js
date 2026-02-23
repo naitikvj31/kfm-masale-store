@@ -3,37 +3,34 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { prisma } from '@/lib/db';
+import bcrypt from 'bcrypt';
+import crypto from 'crypto';
+import { sendVerificationEmail } from '@/lib/mail';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback-super-secret-key-for-kfm';
-const key = new TextEncoder().encode(JWT_SECRET);
+const secretKey = process.env.JWT_SECRET || 'super-secret-key-change-this-in-production';
+const encodedKey = new TextEncoder().encode(secretKey);
 
-// Hardcoded for now per requirements
-const STATIC_USER = {
-    id: 1,
-    email: 'natsvijay656@gmail.com',
-    password: 'Naitik@123',
-    name: 'Naitik Vijay',
-};
-
-// 1. Core Cryptography functions
+// --- JWT Utilites ---
 export async function encrypt(payload) {
-    return await new SignJWT(payload)
+    return new SignJWT(payload)
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .setExpirationTime('7d') // Session lasts 7 days
-        .sign(key);
+        .setExpirationTime('7d')
+        .sign(encodedKey);
 }
 
-export async function decrypt(input) {
+export async function decrypt(session) {
     try {
-        const { payload } = await jwtVerify(input, key, { algorithms: ['HS256'] });
+        const { payload } = await jwtVerify(session, encodedKey, {
+            algorithms: ['HS256'],
+        });
         return payload;
     } catch (error) {
         return null;
     }
 }
 
-// 2. Session Management
 export async function getSession() {
     const cookieStore = await cookies();
     const session = cookieStore.get('kfm_consumer_session')?.value;
@@ -41,7 +38,8 @@ export async function getSession() {
     return await decrypt(session);
 }
 
-// 3. User Login Action
+// --- Consumer Authentication ---
+
 export async function loginClient(formData) {
     const email = formData.get('email');
     const password = formData.get('password');
@@ -50,13 +48,28 @@ export async function loginClient(formData) {
         return { error: 'Email and password are required' };
     }
 
-    if (email === STATIC_USER.email && password === STATIC_USER.password) {
-        // Create JWT & Set Cookie
+    try {
+        const user = await prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            return { error: 'Invalid email or password' };
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return { error: 'Invalid email or password' };
+        }
+
+        if (!user.isVerified) {
+            return { error: 'Please verify your email before logging in. Check your inbox.' };
+        }
+
+        // Create JWT
         const sessionPayload = {
-            id: STATIC_USER.id,
-            email: STATIC_USER.email,
-            name: STATIC_USER.name,
-            role: 'customer'
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role
         };
         const token = await encrypt(sessionPayload);
 
@@ -66,48 +79,72 @@ export async function loginClient(formData) {
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
             path: '/',
-            maxAge: 7 * 24 * 60 * 60 // 7 days in seconds
+            maxAge: 7 * 24 * 60 * 60 // 7 days
         });
 
         return { success: true };
-    } else {
-        return { error: 'Invalid email or password' };
+    } catch (error) {
+        console.error("Login error:", error);
+        return { error: 'An unexpected error occurred. Please try again later.' };
     }
 }
 
-// 4. User Signup Action (Mock)
 export async function signupClient(formData) {
     const name = formData.get('name');
     const email = formData.get('email');
     const password = formData.get('password');
 
     if (!name || !email || !password) {
-        return { error: 'All fields are required' };
+        return { error: 'Name, email, and password are required' };
     }
 
-    // Usually we would hash password & save to Prisma DB here.
-    // For now, instantly log them in as the static user.
-    const sessionPayload = {
-        id: STATIC_USER.id,
-        email: email,
-        name: name,
-        role: 'customer'
-    };
-    const token = await encrypt(sessionPayload);
+    // Strict Password Validation
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    if (!passwordRegex.test(password)) {
+        return { error: 'Password must be at least 8 characters long, contain at least one uppercase letter, and one special character (e.g., @, #, $).' };
+    }
 
-    const cookieStore = await cookies();
-    cookieStore.set('kfm_consumer_session', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 7 * 24 * 60 * 60
-    });
+    try {
+        // Check if user already exists
+        const existingUser = await prisma.user.findUnique({ where: { email } });
+        if (existingUser) {
+            return { error: 'An account with this email already exists' };
+        }
 
-    return { success: true };
+        // Hash password and create user
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+                isVerified: false // Must verify email first
+            }
+        });
+
+        // Generate verification token
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+        await prisma.verificationToken.create({
+            data: {
+                email: user.email,
+                token,
+                type: 'VERIFY_EMAIL',
+                expiresAt
+            }
+        });
+
+        // Send email
+        await sendVerificationEmail(user.email, user.name, token);
+
+        return { success: true, message: 'Account created! Please check your email to verify your account before logging in.' };
+    } catch (error) {
+        console.error("Signup error details:", error);
+        return { error: error.message || 'Failed to create account. Please try again.' };
+    }
 }
 
-// 5. Logout Action
 export async function logoutClient() {
     const cookieStore = await cookies();
     cookieStore.delete('kfm_consumer_session');

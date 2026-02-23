@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signupClient } from '@/app/actions/auth';
+import { toast } from 'react-hot-toast';
 
 export default function SignupPage() {
     const router = useRouter();
@@ -15,16 +16,25 @@ export default function SignupPage() {
         setError('');
         setIsLoading(true);
 
-        const formData = new FormData(e.target);
-        const res = await signupClient(formData);
+        try {
+            const formData = new FormData(e.target);
 
-        if (res.error) {
-            setError(res.error);
+            toast.loading('Creating account...', { id: 'signup' });
+            const res = await signupClient(formData);
+            toast.dismiss('signup');
+
+            if (res.error) {
+                toast.error(res.error, { duration: 5000 });
+            } else if (res.success) {
+                toast.success(res.message || "Account created successfully! Please verify your email.", { duration: 6000 });
+                router.push('/login');
+                router.refresh();
+            }
+        } catch (err) {
+            toast.dismiss('signup');
+            toast.error("A network error occurred. Please try again.");
+        } finally {
             setIsLoading(false);
-        } else {
-            // Success! Redirect to profile
-            router.push('/profile');
-            router.refresh();
         }
     }
 
@@ -40,13 +50,6 @@ export default function SignupPage() {
                 border: '1px solid var(--color-border-light)'
             }}>
                 <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                    <div style={{
-                        width: '70px', height: '70px', borderRadius: '50%', overflow: 'hidden',
-                        margin: '0 auto 1.5rem', border: '1px solid var(--color-border-light)',
-                        boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
-                    }}>
-                        <img src="/images/products/logokfm.jpg" alt="KFM Masale" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
                     <h1 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-primary)', fontSize: '2.2rem', marginBottom: '0.5rem' }}>
                         Create Account
                     </h1>
@@ -54,21 +57,6 @@ export default function SignupPage() {
                         Join KFM Masale for faster checkout and exclusive offers.
                     </p>
                 </div>
-
-                {error && (
-                    <div style={{
-                        backgroundColor: '#FEF2F2',
-                        color: '#991B1B',
-                        padding: '0.85rem',
-                        borderRadius: '8px',
-                        marginBottom: '1.5rem',
-                        fontSize: '0.9rem',
-                        textAlign: 'center',
-                        border: '1px solid #FCA5A5'
-                    }}>
-                        {error}
-                    </div>
-                )}
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                     <div className="form-group">
