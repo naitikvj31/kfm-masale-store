@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useCart } from './CartProvider';
 
 export default function ProductCard({ product }) {
+    const { addToCart, openCart } = useCart();
     const firstImage = product.images?.[0]?.url || product.imageUrl || null;
     const variants = product.variants || [];
 
@@ -292,22 +294,36 @@ export default function ProductCard({ product }) {
                         )}
 
                         {/* CTA Button */}
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '0.5rem',
-                            padding: '0.7rem',
-                            backgroundColor: isOutOfStock ? '#F3F4F6' : 'var(--color-primary)',
-                            color: isOutOfStock ? '#9CA3AF' : 'white',
-                            borderRadius: '10px',
-                            fontWeight: 600,
-                            fontSize: '0.9rem',
-                            transition: 'background 0.2s ease'
-                        }}>
+                        <button
+                            disabled={isOutOfStock}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                if (!isOutOfStock && selectedVariant) {
+                                    addToCart(product, selectedVariant);
+                                    openCart();
+                                }
+                            }}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.5rem',
+                                padding: '0.7rem',
+                                width: '100%',
+                                border: 'none',
+                                cursor: isOutOfStock ? 'not-allowed' : 'pointer',
+                                backgroundColor: isOutOfStock ? '#F3F4F6' : 'var(--color-primary)',
+                                color: isOutOfStock ? '#9CA3AF' : 'white',
+                                borderRadius: '10px',
+                                fontWeight: 600,
+                                fontSize: '0.9rem',
+                                transition: 'background 0.2s ease'
+                            }}
+                        >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
-                            {isOutOfStock ? 'Sold Out' : 'View & Buy'}
-                        </div>
+                            {isOutOfStock ? 'Sold Out' : 'Buy'}
+                        </button>
                     </div>
                 </div>
             </article>
