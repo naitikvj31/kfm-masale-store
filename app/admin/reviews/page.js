@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { getSession } from '@/app/actions/auth';
 import { redirect } from 'next/navigation';
 import AdminReviewsTable from '@/components/AdminReviewsTable';
 
@@ -10,12 +9,6 @@ export const metadata = {
 };
 
 export default async function AdminReviewsPage() {
-    const session = await getSession();
-
-    // Extra protection just in case middleware misses it
-    if (!session || session.role !== 'ADMIN') {
-        redirect('/login');
-    }
 
     const reviews = await prisma.review.findMany({
         orderBy: { createdAt: 'desc' },

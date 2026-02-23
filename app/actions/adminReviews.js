@@ -1,13 +1,14 @@
 'use server';
 
 import { prisma } from '@/lib/db';
-import { getSession } from '@/app/actions/auth';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 
 export async function deleteReview(reviewId) {
     try {
-        const session = await getSession();
-        if (!session || session.role !== 'ADMIN') {
+        const cookieStore = await cookies();
+        const token = cookieStore.get('admin_token')?.value;
+        if (token !== 'authenticated') {
             return { error: 'Unauthorized. Admin access required.' };
         }
 
@@ -38,8 +39,9 @@ export async function deleteReview(reviewId) {
 
 export async function toggleReviewStatus(reviewId, newStatus) {
     try {
-        const session = await getSession();
-        if (!session || session.role !== 'ADMIN') {
+        const cookieStore = await cookies();
+        const token = cookieStore.get('admin_token')?.value;
+        if (token !== 'authenticated') {
             return { error: 'Unauthorized. Admin access required.' };
         }
 
