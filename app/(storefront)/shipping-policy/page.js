@@ -20,8 +20,8 @@ export default function ShippingPolicyPage() {
                     <h2 style={{ fontSize: '1.5rem', color: 'var(--color-primary)', marginTop: '1rem' }}>2. Delivery Charges</h2>
                     <p>Shipping charges for your order will be calculated and displayed at checkout:</p>
                     <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc' }}>
-                        <li><strong>Orders under ₹500:</strong> A flat standard delivery fee of ₹100 applies.</li>
-                        <li><strong>Orders ₹500 and above:</strong> Enjoy FREE standard delivery on us.</li>
+                        <li><strong>Orders under ₹1000:</strong> A flat standard delivery fee of ₹100 applies.</li>
+                        <li><strong>Orders ₹1000 and above:</strong> Enjoy FREE standard delivery on us.</li>
                     </ul>
 
                     <h2 style={{ fontSize: '1.5rem', color: 'var(--color-primary)', marginTop: '1rem' }}>3. Delivery Timelines</h2>

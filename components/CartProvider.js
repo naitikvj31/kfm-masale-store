@@ -59,7 +59,7 @@ export function CartProvider({ children }) {
     const closeCart = () => setIsCartOpen(false);
 
     const subtotalAmount = cartItems.reduce((sum, item) => sum + ((item.variant.discountPrice || item.variant.price) * item.quantity), 0);
-    const deliveryFee = subtotalAmount > 0 && subtotalAmount < 500 ? 100 : 0;
+    const deliveryFee = subtotalAmount > 0 && subtotalAmount < 1000 ? 100 : 0;
     const totalAmount = subtotalAmount + deliveryFee;
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 

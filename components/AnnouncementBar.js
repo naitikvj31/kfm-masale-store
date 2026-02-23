@@ -3,7 +3,7 @@
 export default function AnnouncementBar() {
     const messages = [
         '🌿 Flat 20% OFF on all 500g & 1kg Premium Spice Packs!',
-        '🚚 Free Home Delivery on Orders Above ₹500',
+        '🚚 Free Home Delivery on Orders Above ₹1000',
         '💬 Order Instantly on WhatsApp: +91 88754 43482',
         '✨ Browse our complete range: Authentic Haldi, Mirchi, Dhaniya, & Garam Masala',
         '⭐ 100% Natural & Farm-Fresh — Trusted by Families Across India'

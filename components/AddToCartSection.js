@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useCart } from '@/components/CartProvider';
+import { useCart } from './CartProvider';
 
 export default function AddToCartSection({ product }) {
     const { addToCart } = useCart();
