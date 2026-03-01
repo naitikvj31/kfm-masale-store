@@ -100,24 +100,35 @@ export default function CheckoutPage() {
                 }),
             });
 
-            if (res.ok) {
-                const data = await res.json();
-                setOrderId(data.orderId || Math.floor(100000 + Math.random() * 900000));
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({}));
+                console.error("API Error:", errData);
 
-                if (paymentMethod === 'cod') {
-                    // Open WhatsApp immediately for COD
-                    const whatsappMsg = buildWhatsAppMessage();
-                    window.open(`https://wa.me/918875443482?text=${whatsappMsg}`, '_blank');
-                    clearCart();
-                }
-
-                setOrderPlaced(true);
+                // If the error is a specific validation error (like email mismatch), we might want to alert the user
+                // But as per the existing logic, we fallback to WhatsApp
+                throw new Error(errData.error || 'Failed to place order via API');
             }
+
+            const data = await res.json();
+            setOrderId(data.orderId || Math.floor(100000 + Math.random() * 900000));
+
+            if (paymentMethod === 'cod') {
+                // Open WhatsApp immediately for COD
+                const whatsappMsg = buildWhatsAppMessage();
+                window.open(`https://wa.me/918875443482?text=${whatsappMsg}`, '_blank');
+                clearCart();
+            }
+
+            setOrderPlaced(true);
         } catch (err) {
-            // Even if API fails, send via WhatsApp
-            const whatsappMsg = buildWhatsAppMessage();
-            window.open(`https://wa.me/918875443482?text=${whatsappMsg}`, '_blank');
-            clearCart();
+            console.error("Order fallback triggered:", err);
+            // Even if API fails, proceed with the UI flow
+            if (paymentMethod === 'cod') {
+                const whatsappMsg = buildWhatsAppMessage();
+                window.open(`https://wa.me/918875443482?text=${whatsappMsg}`, '_blank');
+                clearCart();
+            }
+            // For UPI, the next screen handles the WhatsApp message
             setOrderPlaced(true);
         }
 
