@@ -6,12 +6,12 @@ import HoliEffect from '@/components/HoliEffect';
 const prisma = new PrismaClient();
 
 export const metadata = {
-  title: 'KFM Masale — Pure & Organic Indian Spices',
-  description: 'Shop 100% organic, farm-fresh Indian spices from KFM Masale. Turmeric, Garam Masala, Cumin, Red Chili Powder and more. Available in 50g to 1kg packs.',
-  keywords: 'organic spices, Indian masale, turmeric, garam masala, cumin, organic masala shop, KFM Masale',
+  title: 'KFM Masale — Buy Pure & Organic Indian Spices Online',
+  description: 'Shop 100% organic, farm-fresh Indian spices from KFM Masale. Turmeric, Garam Masala, Cumin, Red Chili Powder and more. Buy premium quality masalas online.',
+  keywords: 'kfm masale, spices, pure spices, organic indian spices, best spices online, buy spices online india, authentic indian spices, fresh ground spices, wholesale spices india, premium quality masalas, natural herbs and spices, kfm masale kishangarh, rajasthan spices online, highest quality spices, bulk masalas, export quality spices, farm fresh spices, homemade masalas, traditional stone ground spices, chemical free spices, no preservatives spices, pure turmeric powder, organic haldi online, best garam masala powder, pure red chili powder, authentic cumin seeds, jeera powder online, coriander powder, dhaniya powder, pure hing, asafoetida online, black pepper powder, kali mirch, dry ginger powder, saunth, amchur powder, dry mango powder, kasuri methi, fenugreek leaves, green cardamom, hari elaichi, cloves, laung, cinnamon sticks, dalchini, bay leaves, tej patta, black cardamom, badi elaichi, mace, javitri, nutmeg, jaiphal, star anise, chakri phool, mustard seeds, sarson, fennel seeds, saunf, carom seeds, ajwain, sesame seeds, til, poppy seeds, khus khus, rock salt, sendha namak, black salt, kala namak, chaat masala, chhole masala, pav bhaji masala, sambar masala, rasam powder, meat masala, chicken masala, biryani masala, kitchen king masala, tea masala, chai patti masala, authentic rajasthani spices, rajasthani mirchi powder, mathania red chilli, kashmiri lal mirch powder, spicy masale, organic spice store, best spice brand in india, buy pure spices, rajasthani spices supplier, top indian spice company, natural food spices, organic culinary spices, unadulterated masalas, indian cooking spices, spice blends for cooking, masale for daily use, best quality hing, premium haldi powder, raw spices online, whole spices wholesale, indian herbs store',
   openGraph: {
-    title: 'KFM Masale — Pure & Organic Indian Spices',
-    description: 'Shop 100% organic, farm-fresh Indian spices.',
+    title: 'KFM Masale — Buy Pure & Organic Indian Spices Online',
+    description: 'Shop 100% organic, farm-fresh Indian spices. Order premium, authentic stone-ground masalas online from KFM Masale.',
     type: 'website',
   }
 };
@@ -234,6 +234,29 @@ export default async function Home() {
           <a href="#products" className="btn btn-white btn-lg">
             Shop Now
           </a>
+        </div>
+      </section>
+
+      {/* ===== SEO ON-PAGE CONTENT BLOCK ===== */}
+      <section style={{ backgroundColor: '#F9FAFB', padding: '3rem 0', borderTop: '1px solid var(--color-border-light)' }}>
+        <div className="container" style={{
+          maxWidth: '900px',
+          margin: '0 auto',
+          color: 'var(--color-text-muted)',
+          fontSize: '0.85rem',
+          lineHeight: 1.6,
+          textAlign: 'justify'
+        }}>
+          <h2 style={{ fontSize: '1rem', color: 'var(--color-text)', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>About KFM Masale — The Best Spices Online in India</h2>
+          <p style={{ marginBottom: '1rem' }}>
+            Welcome to <strong>KFM Masale</strong>, your one-stop destination to <a href="#products" style={{ color: 'inherit', textDecoration: 'underline' }}>buy spices online in India</a>. Based in Kishangarh, Rajasthan, we have been supplying <strong>authentic Indian spices</strong>, <em>fresh ground spices</em>, and <strong>premium quality masalas</strong> since 1974. Whether you are looking for <strong>organic Indian spices</strong>, traditional stone ground spices, or unadulterated masalas with no preservatives, KFM Masale guarantees the <em>highest quality spices</em> delivered directly from the farm to your doorstep. We are recognized as a top Indian spice company offering natural herbs and spices, ideal for both daily household cooking and bulk orders for restaurants seeking <strong>wholesale spices India</strong> or export quality spices.
+          </p>
+          <p style={{ marginBottom: '1rem' }}>
+            Our expansive collection of <strong>pure spices</strong> caters to all your culinary needs. From <strong>pure turmeric powder (organic haldi online)</strong> and the <em>best garam masala powder</em> to our vibrant, spicy <strong>pure red chili powder</strong> and authentic rajasthani spices like mathania red chilli and kashmiri lal mirch powder, we have it all. Enhance your curries with our <strong>authentic cumin seeds (jeera powder online)</strong>, <strong>coriander powder (dhaniya powder)</strong>, and our notoriously pungent <strong>pure hing (asafoetida online)</strong>. For complex flavors, explore our whole spices including <strong>black pepper powder (kali mirch)</strong>, <em>dry ginger powder (saunth)</em>, amchur powder (dry mango powder), kasuri methi (fenugreek leaves), green cardamom (hari elaichi), cloves (laung), cinnamon sticks (dalchini), bay leaves (tej patta), black cardamom (badi elaichi), mace (javitri), nutmeg (jaiphal), star anise (chakri phool), mustard seeds (sarson), fennel seeds (saunf), carom seeds (ajwain), sesame seeds (til), and poppy seeds (khus khus).
+          </p>
+          <p>
+            When preparing delectable regional dishes, our specialized spice blends for cooking are unmatched. Try our chemical free spices like chaat masala, chhole masala, pav bhaji masala, sambar masala, rasam powder, meat masala, chicken masala, biryani masala, kitchen king masala, and aromatic tea masala (chai patti masala). We also offer natural food spices like rock salt (sendha namak) and black salt (kala namak). Buy pure spices from our <strong>organic masala shop</strong> today and experience why KFM Masale is considered the <em>best spice brand in India</em>. From premium haldi powder to raw spices online and whole spices wholesale, the KFM Masale organic spice store is committed to bringing authentic, homemade masalas into every Indian kitchen.
+          </p>
         </div>
       </section>
     </main>
