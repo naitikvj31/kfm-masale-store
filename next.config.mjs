@@ -13,6 +13,21 @@ const nextConfig = {
     ],
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/shop',
+        destination: '/#products',
+        permanent: true,
+      },
+      {
+        source: '/forgot-password',
+        destination: '/login',
+        permanent: true,
+      }
+    ];
+  },
+
   // Apply strict HTTP Security Headers globally
   async headers() {
     return [

@@ -117,11 +117,31 @@ export default function Footer() {
                         }}>
                             Quick Links
                         </h4>
-                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none', marginBottom: '1.5rem' }}>
                             <FooterLink href="/" label="Home" />
                             <FooterLink href="/#products" label="Our Spices" />
                             <FooterLink href="/#about" label="Why Choose Us" />
                             <FooterLink href="/checkout" label="Checkout" />
+                            <FooterLink href="/signup" label="Sign Up" />
+                        </ul>
+
+                        <h4 style={{
+                            color: 'var(--color-accent)',
+                            fontSize: '0.78rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            marginBottom: '1.25rem',
+                            fontWeight: 700,
+                            fontFamily: 'var(--font-body)'
+                        }}>
+                            Popular Spices
+                        </h4>
+                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                            <FooterLink href="/product/dhaniya-powder" label="Dhaniya Powder" />
+                            <FooterLink href="/product/hing-powder" label="Hing Powder" />
+                            <FooterLink href="/product/hing-raw-pure-afgani" label="Raw Hing Afgani" />
+                            <FooterLink href="/product/special-mirch-powder" label="Special Mirch" />
+                            <FooterLink href="/product/kashmiri-mirchi" label="Kashmiri Mirchi" />
                         </ul>
                     </div>
 
@@ -138,9 +158,27 @@ export default function Footer() {
                         }}>
                             Customer Care
                         </h4>
-                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none', marginBottom: '1.5rem' }}>
                             <FooterLink href="/#products" label="Bulk Orders" />
                             <FooterLink href="https://wa.me/918875443482" label="WhatsApp Support" />
+                        </ul>
+
+                        <h4 style={{
+                            color: 'var(--color-accent)',
+                            fontSize: '0.78rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            marginBottom: '1.25rem',
+                            fontWeight: 700,
+                            fontFamily: 'var(--font-body)'
+                        }}>
+                            More Spices
+                        </h4>
+                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                            <FooterLink href="/product/turmeric-powder" label="Turmeric Powder" />
+                            <FooterLink href="/product/garam-masala" label="Garam Masala" />
+                            <FooterLink href="/product/tikhalal-chilli-powder" label="Tikhalal Chilli" />
+                            <FooterLink href="/product/tea-masale" label="Tea Masala" />
                         </ul>
                     </div>
 
