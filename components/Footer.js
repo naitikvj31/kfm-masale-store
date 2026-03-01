@@ -31,7 +31,7 @@ export default function Footer() {
                 {/* Main Footer Content */}
                 <div className="container" style={{
                     display: 'grid',
-                    gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1.2fr',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
                     gap: '2.5rem',
                     padding: '3.5rem 1.5rem 2.5rem'
                 }}>
@@ -104,103 +104,64 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Quick Links */}
+                    {/* All Spices */}
                     <div>
                         <h4 style={{
                             color: 'var(--color-accent)',
-                            fontSize: '0.78rem',
+                            fontSize: '0.85rem',
                             textTransform: 'uppercase',
-                            letterSpacing: '2px',
-                            marginBottom: '1.25rem',
+                            letterSpacing: '1.5px',
+                            marginBottom: '1.5rem',
                             fontWeight: 700,
                             fontFamily: 'var(--font-body)'
                         }}>
-                            Quick Links
+                            From Our Kitchen
                         </h4>
-                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none', marginBottom: '1.5rem' }}>
-                            <FooterLink href="/" label="Home" />
-                            <FooterLink href="/#products" label="Our Spices" />
-                            <FooterLink href="/#about" label="Why Choose Us" />
-                            <FooterLink href="/checkout" label="Checkout" />
-                            <FooterLink href="/signup" label="Sign Up" />
-                        </ul>
-
-                        <h4 style={{
-                            color: 'var(--color-accent)',
-                            fontSize: '0.78rem',
-                            textTransform: 'uppercase',
-                            letterSpacing: '2px',
-                            marginBottom: '1.25rem',
-                            fontWeight: 700,
-                            fontFamily: 'var(--font-body)'
-                        }}>
-                            Popular Spices
-                        </h4>
-                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
-                            <FooterLink href="/product/dhaniya-powder" label="Dhaniya Powder" />
-                            <FooterLink href="/product/hing-powder" label="Hing Powder" />
-                            <FooterLink href="/product/hing-raw-pure-afgani" label="Raw Hing Afgani" />
-                            <FooterLink href="/product/special-mirch-powder" label="Special Mirch" />
-                            <FooterLink href="/product/kashmiri-mirchi" label="Kashmiri Mirchi" />
-                        </ul>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem 1.5rem' }}>
+                            <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                                <FooterLink href="/product/dhaniya-powder" label="Dhaniya" />
+                                <FooterLink href="/product/hing-powder" label="Hing Powder" />
+                                <FooterLink href="/product/hing-raw-pure-afgani" label="Afgani Hing" />
+                                <FooterLink href="/product/special-mirch-powder" label="Special Mirch" />
+                                <FooterLink href="/product/kashmiri-mirchi" label="Kashmiri Mirch" />
+                            </ul>
+                            <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                                <FooterLink href="/product/turmeric-powder" label="Turmeric" />
+                                <FooterLink href="/product/garam-masala" label="Garam Masala" />
+                                <FooterLink href="/product/tikhalal-chilli-powder" label="Tikhalal Chilli" />
+                                <FooterLink href="/product/tea-masale" label="Tea Masala" />
+                            </ul>
+                        </div>
                     </div>
 
-                    {/* Customer Care */}
+                    {/* Important & Legal Links */}
                     <div>
                         <h4 style={{
                             color: 'var(--color-accent)',
-                            fontSize: '0.78rem',
+                            fontSize: '0.85rem',
                             textTransform: 'uppercase',
-                            letterSpacing: '2px',
-                            marginBottom: '1.25rem',
+                            letterSpacing: '1.5px',
+                            marginBottom: '1.5rem',
                             fontWeight: 700,
                             fontFamily: 'var(--font-body)'
                         }}>
-                            Customer Care
+                            Helpful Links
                         </h4>
-                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none', marginBottom: '1.5rem' }}>
-                            <FooterLink href="/#products" label="Bulk Orders" />
-                            <FooterLink href="https://wa.me/918875443482" label="WhatsApp Support" />
-                        </ul>
-
-                        <h4 style={{
-                            color: 'var(--color-accent)',
-                            fontSize: '0.78rem',
-                            textTransform: 'uppercase',
-                            letterSpacing: '2px',
-                            marginBottom: '1.25rem',
-                            fontWeight: 700,
-                            fontFamily: 'var(--font-body)'
-                        }}>
-                            More Spices
-                        </h4>
-                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
-                            <FooterLink href="/product/turmeric-powder" label="Turmeric Powder" />
-                            <FooterLink href="/product/garam-masala" label="Garam Masala" />
-                            <FooterLink href="/product/tikhalal-chilli-powder" label="Tikhalal Chilli" />
-                            <FooterLink href="/product/tea-masale" label="Tea Masala" />
-                        </ul>
-                    </div>
-
-                    {/* Legal */}
-                    <div>
-                        <h4 style={{
-                            color: 'var(--color-accent)',
-                            fontSize: '0.78rem',
-                            textTransform: 'uppercase',
-                            letterSpacing: '2px',
-                            marginBottom: '1.25rem',
-                            fontWeight: 700,
-                            fontFamily: 'var(--font-body)'
-                        }}>
-                            Legal
-                        </h4>
-                        <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
-                            <FooterLink href="/privacy-policy" label="Privacy Policy" />
-                            <FooterLink href="/terms-and-conditions" label="Terms & Conditions" />
-                            <FooterLink href="/refund-policy" label="Refund & Returns" />
-                            <FooterLink href="/shipping-policy" label="Shipping Policy" />
-                        </ul>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem 1.5rem' }}>
+                            <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                                <FooterLink href="/" label="Home" />
+                                <FooterLink href="/#products" label="Bulk Orders" />
+                                <FooterLink href="/#about" label="Why Choose Us" />
+                                <FooterLink href="/checkout" label="Checkout" />
+                                <FooterLink href="/signup" label="Sign Up" />
+                            </ul>
+                            <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
+                                <FooterLink href="/privacy-policy" label="Privacy Policy" />
+                                <FooterLink href="/terms-and-conditions" label="T&C" />
+                                <FooterLink href="/refund-policy" label="Refunds" />
+                                <FooterLink href="/shipping-policy" label="Shipping" />
+                            </ul>
+                        </div>
                     </div>
 
                     {/* Contact */}

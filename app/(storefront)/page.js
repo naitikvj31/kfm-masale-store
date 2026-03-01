@@ -238,25 +238,38 @@ export default async function Home() {
       </section>
 
       {/* ===== SEO ON-PAGE CONTENT BLOCK ===== */}
-      <section style={{ backgroundColor: '#F9FAFB', padding: '3rem 0', borderTop: '1px solid var(--color-border-light)' }}>
-        <div className="container" style={{
-          maxWidth: '900px',
-          margin: '0 auto',
-          color: 'var(--color-text-muted)',
-          fontSize: '0.85rem',
-          lineHeight: 1.6,
-          textAlign: 'justify'
-        }}>
-          <h2 style={{ fontSize: '1rem', color: 'var(--color-text)', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>About KFM Masale — The Best Spices Online in India</h2>
-          <p style={{ marginBottom: '1rem' }}>
-            Welcome to <strong>KFM Masale</strong>, your one-stop destination to <a href="#products" style={{ color: 'inherit', textDecoration: 'underline' }}>buy spices online in India</a>. Based in Kishangarh, Rajasthan, we have been supplying <strong>authentic Indian spices</strong>, <em>fresh ground spices</em>, and <strong>premium quality masalas</strong> since 1974. Whether you are looking for <strong>organic Indian spices</strong>, traditional stone ground spices, or unadulterated masalas with no preservatives, KFM Masale guarantees the <em>highest quality spices</em> delivered directly from the farm to your doorstep. We are recognized as a top Indian spice company offering natural herbs and spices, ideal for both daily household cooking and bulk orders for restaurants seeking <strong>wholesale spices India</strong> or export quality spices.
-          </p>
-          <p style={{ marginBottom: '1rem' }}>
-            Our expansive collection of <strong>pure spices</strong> caters to all your culinary needs. From <strong>pure turmeric powder (organic haldi online)</strong> and the <em>best garam masala powder</em> to our vibrant, spicy <strong>pure red chili powder</strong> and authentic rajasthani spices like mathania red chilli and kashmiri lal mirch powder, we have it all. Enhance your curries with our <strong>authentic cumin seeds (jeera powder online)</strong>, <strong>coriander powder (dhaniya powder)</strong>, and our notoriously pungent <strong>pure hing (asafoetida online)</strong>. For complex flavors, explore our whole spices including <strong>black pepper powder (kali mirch)</strong>, <em>dry ginger powder (saunth)</em>, amchur powder (dry mango powder), kasuri methi (fenugreek leaves), green cardamom (hari elaichi), cloves (laung), cinnamon sticks (dalchini), bay leaves (tej patta), black cardamom (badi elaichi), mace (javitri), nutmeg (jaiphal), star anise (chakri phool), mustard seeds (sarson), fennel seeds (saunf), carom seeds (ajwain), sesame seeds (til), and poppy seeds (khus khus).
-          </p>
-          <p>
-            When preparing delectable regional dishes, our specialized spice blends for cooking are unmatched. Try our chemical free spices like chaat masala, chhole masala, pav bhaji masala, sambar masala, rasam powder, meat masala, chicken masala, biryani masala, kitchen king masala, and aromatic tea masala (chai patti masala). We also offer natural food spices like rock salt (sendha namak) and black salt (kala namak). Buy pure spices from our <strong>organic masala shop</strong> today and experience why KFM Masale is considered the <em>best spice brand in India</em>. From premium haldi powder to raw spices online and whole spices wholesale, the KFM Masale organic spice store is committed to bringing authentic, homemade masalas into every Indian kitchen.
-          </p>
+      <section style={{ position: 'relative', padding: '5rem 0', backgroundColor: 'var(--color-bg-sage)', overflow: 'hidden' }}>
+        <div style={{
+          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundImage: 'radial-gradient(var(--color-primary-light) 1px, transparent 1px)',
+          backgroundSize: '30px 30px', opacity: 0.1
+        }}></div>
+        <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1000px' }}>
+          <div style={{ backgroundColor: 'white', padding: '3.5rem', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.05)', border: '1px solid var(--color-border-light)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '2rem' }}>
+              <div style={{ width: '40px', height: '4px', backgroundColor: 'var(--color-accent)', borderRadius: '2px' }}></div>
+              <h2 style={{ fontSize: '1.75rem', color: 'var(--color-primary)', fontFamily: 'var(--font-heading)', fontWeight: 'bold', margin: 0 }}>
+                About KFM Masale — The Best Spices Online in India
+              </h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', color: 'var(--color-text)', fontSize: '0.92rem', lineHeight: 1.8, textAlign: 'justify' }}>
+              <div>
+                <p style={{ marginBottom: '1.25rem' }}>
+                  Welcome to <strong>KFM Masale</strong>, your one-stop destination to <a href="#products" style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 600 }}>buy spices online in India</a>. Based in Kishangarh, Rajasthan, we have been supplying <strong>authentic Indian spices</strong>, <em>fresh ground spices</em>, and <strong>premium quality masalas</strong> since 1974. Whether you are looking for <strong>organic Indian spices</strong>, traditional stone ground spices, or unadulterated masalas with no preservatives, KFM Masale guarantees the <em>highest quality spices</em> delivered directly from the farm to your doorstep. We are recognized as a top Indian spice company offering natural herbs and spices, ideal for both daily household cooking and bulk orders for restaurants seeking <strong>wholesale spices India</strong> or export quality spices.
+                </p>
+              </div>
+              <div>
+                <p style={{ marginBottom: '1.25rem' }}>
+                  Our expansive collection of <strong>pure spices</strong> caters to all your culinary needs. From <strong>pure turmeric powder (organic haldi online)</strong> and the <em>best garam masala powder</em> to our vibrant, spicy <strong>pure red chili powder</strong> and authentic rajasthani spices like mathania red chilli and kashmiri lal mirch powder, we have it all. Enhance your curries with our <strong>authentic cumin seeds (jeera powder online)</strong>, <strong>coriander powder (dhaniya powder)</strong>, and our notoriously pungent <strong>pure hing (asafoetida online)</strong>. For complex flavors, explore our whole spices including <strong>black pepper powder (kali mirch)</strong>, <em>dry ginger powder (saunth)</em>, amchur powder (dry mango powder), kasuri methi (fenugreek leaves), green cardamom (hari elaichi), cloves (laung), cinnamon sticks (dalchini), bay leaves (tej patta), black cardamom (badi elaichi), mace (javitri), nutmeg (jaiphal), star anise (chakri phool), mustard seeds (sarson), fennel seeds (saunf), carom seeds (ajwain), sesame seeds (til), and poppy seeds (khus khus).
+                </p>
+              </div>
+              <div style={{ gridColumn: '1 / -1', borderTop: '1px dashed var(--color-border-light)', paddingTop: '2rem' }}>
+                <p>
+                  When preparing delectable regional dishes, our specialized spice blends for cooking are unmatched. Try our chemical free spices like chaat masala, chhole masala, pav bhaji masala, sambar masala, rasam powder, meat masala, chicken masala, biryani masala, kitchen king masala, and aromatic tea masala (chai patti masala). We also offer natural food spices like rock salt (sendha namak) and black salt (kala namak). Buy pure spices from our <strong>organic masala shop</strong> today and experience why KFM Masale is considered the <em>best spice brand in India</em>. From premium haldi powder to raw spices online and whole spices wholesale, the KFM Masale organic spice store is committed to bringing authentic, homemade masalas into every Indian kitchen.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
