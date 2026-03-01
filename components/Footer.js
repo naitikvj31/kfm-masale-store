@@ -265,9 +265,17 @@ export default function Footer() {
                     padding: '1rem',
                     textAlign: 'center',
                     fontSize: '0.78rem',
-                    color: 'rgba(255,255,255,0.25)'
+                    color: 'rgba(255,255,255,0.25)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem'
                 }}>
-                    &copy; {new Date().getFullYear()} KFM Masale — Kamla Flour Mill. All rights reserved. Made with ❤️ in India.
+                    <div>
+                        &copy; {new Date().getFullYear()} KFM Masale — Kamla Flour Mill. All rights reserved. Made with ❤️ in India.
+                    </div>
+                    <div>
+                        Developed and managed by <a href="https://naigrowth.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)', textDecoration: 'none', fontWeight: 600 }}>NaiGrowth</a>
+                    </div>
                 </div>
             </div>
         </footer>
