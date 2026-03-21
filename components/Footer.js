@@ -150,8 +150,8 @@ export default function Footer() {
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem 1.5rem' }}>
                             <ul style={{ padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', listStyle: 'none' }}>
                                 <FooterLink href="/" label="Home" />
-                                <FooterLink href="/#products" label="Bulk Orders" />
-                                <FooterLink href="/#about" label="Why Choose Us" />
+                                <FooterLink href="/products" label="Bulk Orders" />
+                                <FooterLink href="/about" label="Why Choose Us" />
                                 <FooterLink href="/checkout" label="Checkout" />
                                 <FooterLink href="/signup" label="Sign Up" />
                             </ul>

@@ -9,14 +9,6 @@ export default function Navbar() {
     const pathname = usePathname();
     const { toggleCart, totalItems, isMounted } = useCart();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [activeHash, setActiveHash] = useState('');
-
-    useEffect(() => {
-        setActiveHash(window.location.hash);
-        const handleHashChange = () => setActiveHash(window.location.hash);
-        window.addEventListener('hashchange', handleHashChange);
-        return () => window.removeEventListener('hashchange', handleHashChange);
-    }, []);
 
     if (pathname?.startsWith('/admin')) return null;
 
@@ -35,9 +27,9 @@ export default function Navbar() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 height: '76px',
-                padding: '0 2rem',
+                padding: '0 5%',
                 width: '100%',
-                maxWidth: '1920px',
+                maxWidth: '1536px',
                 margin: '0 auto'
             }}>
 
@@ -120,9 +112,9 @@ export default function Navbar() {
                 {/* Navigation (Desktop) */}
                 <nav className="hide-mobile" aria-label="Main navigation">
                     <ul style={{ display: 'flex', listStyle: 'none', gap: '2rem', margin: 0, padding: 0 }}>
-                        <NavLink href="/" label="Home" active={pathname === '/' && activeHash === ''} onClick={() => setActiveHash('')} />
-                        <NavLink href="/#products" label="Our Spices" active={activeHash === '#products'} onClick={() => setActiveHash('#products')} />
-                        <NavLink href="/#about" label="Why Us" active={activeHash === '#about'} onClick={() => setActiveHash('#about')} />
+                        <NavLink href="/" label="Home" active={pathname === '/'} />
+                        <NavLink href="/products" label="Our Spices" active={pathname === '/products'} />
+                        <NavLink href="/about" label="Why Us" active={pathname === '/about'} />
                     </ul>
                 </nav>
 
@@ -207,9 +199,9 @@ export default function Navbar() {
                     <style>{`
                         @media (min-width: 769px) { .hide-desktop-menu { display: none !important; } }
                     `}</style>
-                    <Link href="/" onClick={() => { setMobileMenuOpen(false); setActiveHash(''); }} style={{ textDecoration: 'none', color: pathname === '/' && activeHash === '' ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: 600, fontSize: '1.05rem' }}>Home</Link>
-                    <Link href="/#products" onClick={() => { setMobileMenuOpen(false); setActiveHash('#products'); }} style={{ textDecoration: 'none', color: activeHash === '#products' ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: 600, fontSize: '1.05rem' }}>Our Spices</Link>
-                    <Link href="/#about" onClick={() => { setMobileMenuOpen(false); setActiveHash('#about'); }} style={{ textDecoration: 'none', color: activeHash === '#about' ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: 600, fontSize: '1.05rem' }}>Why Us</Link>
+                    <Link href="/" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: pathname === '/' ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: 600, fontSize: '1.05rem' }}>Home</Link>
+                    <Link href="/products" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: pathname === '/products' ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: 600, fontSize: '1.05rem' }}>Our Spices</Link>
+                    <Link href="/about" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: pathname === '/about' ? 'var(--color-primary)' : 'var(--color-text)', fontWeight: 600, fontSize: '1.05rem' }}>Why Us</Link>
                 </div>
             )}
         </header>

@@ -99,9 +99,9 @@ button {
 
 /* ===== LAYOUT ===== */
 .container {
-  max-width: 1200px;
+  max-width: 1536px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 5%;
 }
 
 .section {
@@ -131,6 +131,26 @@ button {
   background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
   margin: 1rem auto 0;
   border-radius: var(--radius-full);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 }
 
 /* ===== BUTTONS ===== */

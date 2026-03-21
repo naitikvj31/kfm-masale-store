@@ -145,7 +145,7 @@ export default async function Home() {
               </div>
 
               <div className="animate-fade-in-up-delay-2" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <a href="#products" className="btn btn-lg" style={{
+                <a href="/products" className="btn btn-lg" style={{
                   display: 'inline-flex',
                   padding: '0.85rem 2.25rem',
                   borderRadius: '10px',
@@ -348,11 +348,7 @@ export default async function Home() {
               <p style={{ fontSize: '1.1rem' }}>Our spice collection is being updated. Please check back soon!</p>
             </div>
           ) : (
-            <div className="product-grid" style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
-              gap: '2rem'
-            }}>
+            <div className="product-grid">
               {products.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -408,7 +404,7 @@ export default async function Home() {
             Browse our collection above, add your favourite spices to the cart, and complete your order in seconds via WhatsApp. It&apos;s that easy!
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#products" className="btn btn-lg" style={{
+            <a href="/products" className="btn btn-lg" style={{
               background: 'linear-gradient(135deg, #C8A25C, #E8D5A8)',
               color: '#1A3D1C',
               border: 'none',
@@ -494,7 +490,7 @@ export default async function Home() {
                 <h3 style={{ fontSize: '1.1rem', color: 'var(--color-primary)', margin: 0 }}>Who We Are</h3>
               </div>
               <p style={{ color: 'var(--color-text)', fontSize: '0.9rem', lineHeight: 1.8, margin: 0, textAlign: 'left' }}>
-                Welcome to <strong>KFM Masale</strong>, your one-stop destination to <a href="#products" style={{ color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'none' }}>buy spices online in India</a>. Based in Kishangarh, Rajasthan, we have been supplying <strong>authentic Indian spices</strong>, <em>fresh ground spices</em>, and <strong>premium quality masalas</strong> since 1974. We are recognized as a top Indian spice company offering natural herbs and spices, ideal for both daily cooking and <strong>wholesale spices India</strong> orders.
+                Welcome to <strong>KFM Masale</strong>, your one-stop destination to <a href="/products" style={{ color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'none' }}>buy spices online in India</a>. Based in Kishangarh, Rajasthan, we have been supplying <strong>authentic Indian spices</strong>, <em>fresh ground spices</em>, and <strong>premium quality masalas</strong> since 1974. We are recognized as a top Indian spice company offering natural herbs and spices, ideal for both daily cooking and <strong>wholesale spices India</strong> orders.
               </p>
             </div>
 
@@ -516,7 +512,7 @@ export default async function Home() {
                 <h3 style={{ fontSize: '1.1rem', color: 'var(--color-primary)', margin: 0 }}>Our Spice Range</h3>
               </div>
               <p style={{ color: 'var(--color-text)', fontSize: '0.9rem', lineHeight: 1.8, margin: 0, textAlign: 'left' }}>
-                Our expansive collection of <strong>pure spices</strong> caters to all culinary needs. From <strong>pure turmeric powder (organic haldi online)</strong> and <em>best garam masala powder</em> to <strong>pure red chili powder</strong> and authentic rajasthani spices, we have it all. Enhance your curries with <strong>authentic cumin seeds</strong>, <strong>coriander powder</strong>, and our pungent <strong>pure hing (asafoetida)</strong>.
+                Our carefully curated collection of <strong>pure spices</strong> caters to your daily culinary needs. From <strong>pure turmeric powder (organic haldi online)</strong> and our freshly ground <strong>coriander powder (dhaniya)</strong>, to our authentic, pungent <strong>pure hing (asafoetida)</strong> and <strong>100% Raw Afghani Hing</strong>, we have the essentials covered. Enhance your kitchen with our freshly ground, unadulterated masalas.
               </p>
             </div>
           </div>
@@ -538,7 +534,7 @@ export default async function Home() {
               <h3 style={{ fontSize: '1.1rem', color: 'var(--color-primary)', margin: 0 }}>Spice Blends & Specialties</h3>
             </div>
             <p style={{ color: 'var(--color-text)', fontSize: '0.9rem', lineHeight: 1.8, margin: 0, textAlign: 'left' }}>
-              For complex flavors, explore our whole spices including <strong>black pepper powder (kali mirch)</strong>, <em>dry ginger powder (saunth)</em>, amchur powder, kasuri methi, green cardamom, cloves, cinnamon sticks, bay leaves, and more. Try our specialized blends like chaat masala, chhole masala, pav bhaji masala, biryani masala, kitchen king masala, and aromatic <strong>tea masala (chai patti masala)</strong>. We also offer rock salt (sendha namak) and black salt (kala namak). Buy pure spices from our <strong>organic masala shop</strong> and experience why KFM Masale is considered the <em>best spice brand in India</em>. The KFM Masale organic spice store is committed to bringing authentic, homemade masalas into every Indian kitchen.
+              We specialize in delivering vibrant colors and authentic heat with our premium chili collection, proudly featuring our <strong>Special Mirch Powder</strong>, beautifully rich <strong>Kashmiri Mirchi</strong>, and fiery <strong>Tikhalal Chilli Powder</strong>. For complex, everyday flavors, explore our expertly crafted <em>Garam Masala</em>. And to start your mornings right, try our highly requested, aromatic <strong>tea masala (chai patti masala)</strong>. Buy pure spices from our <strong>organic masala shop</strong> and experience why KFM Masale is considered the <em>best spice brand in India</em>. The KFM Masale organic spice store is committed to bringing authentic, homemade masalas directly from Rajasthan into every Indian kitchen.
             </p>
           </div>
         </div>
