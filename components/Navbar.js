@@ -30,12 +30,12 @@ export default function Navbar() {
             borderBottom: '1px solid var(--color-border-light)',
             boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
         }}>
-            <div style={{
+            <div className="navbar-inner" style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 height: '76px',
-                padding: '0 2rem', /* Full width padding */
+                padding: '0 2rem',
                 width: '100%',
                 maxWidth: '1920px',
                 margin: '0 auto'
@@ -66,6 +66,13 @@ export default function Navbar() {
                         @media (max-width: 768px) {
                             .mobile-only-btn { display: block !important; }
                         }
+                        @media (max-width: 480px) {
+                            .brand-subtitle-nav { display: none !important; }
+                            .brand-title-nav { font-size: 1.1rem !important; }
+                            .navbar-inner { padding: 0 1rem !important; }
+                            .nav-actions-container { gap: 0.5rem !important; }
+                            .cart-btn-padding { padding: 0.5rem 0.6rem !important; }
+                        }
                     `}</style>
 
                     {/* Logo */}
@@ -85,22 +92,24 @@ export default function Navbar() {
                             <img src="/images/products/logokfm.jpg" alt="KFM Masale Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                         <div className="brand-text-nav" style={{ lineHeight: 1.2 }}>
-                            <span style={{
+                            <span className="brand-title-nav" style={{
                                 fontFamily: 'var(--font-heading)',
                                 fontSize: '1.25rem',
                                 fontWeight: 700,
                                 color: 'var(--color-primary)',
                                 display: 'block',
-                                letterSpacing: '0.5px'
+                                letterSpacing: '0.5px',
+                                whiteSpace: 'nowrap'
                             }}>
                                 KFM Masale
                             </span>
-                            <span style={{
+                            <span className="brand-subtitle-nav" style={{
                                 fontSize: '0.65rem',
                                 textTransform: 'uppercase',
                                 letterSpacing: '2.5px',
                                 color: 'var(--color-accent)',
-                                fontWeight: 600
+                                fontWeight: 600,
+                                whiteSpace: 'nowrap'
                             }}>
                                 Pure &amp; Organic
                             </span>
@@ -118,11 +127,12 @@ export default function Navbar() {
                 </nav>
 
                 {/* Action Buttons */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div className="nav-actions-container" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     {/* Cart Button */}
                     <button
                         onClick={toggleCart}
                         aria-label={`Shopping cart with ${isMounted ? totalItems : 0} items`}
+                        className="cart-btn-padding"
                         style={{
                             background: 'white',
                             border: '1.5px solid var(--color-border)',

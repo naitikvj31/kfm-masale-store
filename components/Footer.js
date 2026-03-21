@@ -20,14 +20,14 @@ function FooterLink({ href, label }) {
 
 export default function Footer() {
     return (
-        <footer>
+        <footer style={{ backgroundColor: '#1A3D1C' }}>
             {/* Top accent stripe */}
             <div style={{
                 height: '4px',
                 background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary-light), var(--color-accent))',
             }} />
 
-            <div style={{ backgroundColor: '#1A3D1C' }}>
+            <div>
                 {/* Main Footer Content */}
                 <div className="container" style={{
                     display: 'grid',
