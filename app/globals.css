@@ -460,6 +460,16 @@ button {
   .hero-section h1 {
     font-size: 2.25rem !important;
   }
+
+  /* Farm journey grid: 2 columns on tablet */
+  .farm-journey-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* SEO content grid: single column on tablet */
+  .seo-content-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Small screens — phones (up to 640px) */
@@ -487,6 +497,22 @@ button {
   /* Navbar responsive */
   .navbar-links {
     display: none !important;
+  }
+
+  /* Farm journey grid: single column on mobile */
+  .farm-journey-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Journey connecting line: hide on mobile */
+  .journey-line {
+    display: none !important;
+  }
+
+  /* Hero section adjustments */
+  .hero-section {
+    padding: 3rem 0 4rem !important;
   }
 }
 

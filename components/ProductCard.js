@@ -47,22 +47,25 @@ export default function ProductCard({ product }) {
             <article style={{
                 background: 'white',
                 borderRadius: '16px',
-                border: '1px solid var(--color-border-light)',
+                border: '1.5px solid #E0E4E0',
                 overflow: 'hidden',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                transition: 'transform 0.35s ease, box-shadow 0.35s ease',
+                transition: 'transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
                 cursor: 'pointer',
-                position: 'relative'
+                position: 'relative',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
             }}
                 onMouseEnter={e => {
                     e.currentTarget.style.transform = 'translateY(-8px)';
                     e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.12)';
+                    e.currentTarget.style.borderColor = 'var(--color-primary-light)';
                 }}
                 onMouseLeave={e => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
+                    e.currentTarget.style.borderColor = '#E0E4E0';
                 }}
             >
                 {/* Image Area */}

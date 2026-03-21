@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { loginClient as login } from '@/app/actions/auth';
+import { loginAdmin as login } from '@/app/actions/adminAuth';
 
 export default function AdminLoginPage() {
     const [error, setError] = useState('');
@@ -27,7 +27,9 @@ export default function AdminLoginPage() {
 
     return (
         <div style={{
-            minHeight: '100vh',
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            zIndex: 9999,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -58,21 +60,44 @@ export default function AdminLoginPage() {
                     <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', color: '#111827', marginBottom: '0.35rem' }}>
                         Admin Login
                     </h1>
-                    <p style={{ color: '#6B7280', fontSize: '0.9rem' }}>Enter your passcode to access the dashboard</p>
+                    <p style={{ color: '#6B7280', fontSize: '0.9rem' }}>Enter your credentials to access the dashboard</p>
                 </div>
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                     <div>
-                        <label htmlFor="passcode" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#374151' }}>
-                            Passcode
+                        <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#374151' }}>
+                            Email Address
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            autoFocus
+                            style={{
+                                width: '100%',
+                                padding: '0.85rem 1rem',
+                                border: '1.5px solid #E5E7EB',
+                                borderRadius: '10px',
+                                fontSize: '1rem',
+                                fontFamily: 'inherit',
+                                transition: 'border-color 0.2s',
+                                outline: 'none'
+                            }}
+                            onFocus={e => e.currentTarget.style.borderColor = '#2B5E2E'}
+                            onBlur={e => e.currentTarget.style.borderColor = '#E5E7EB'}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.9rem', color: '#374151' }}>
+                            Password
                         </label>
                         <input
                             type="password"
-                            id="passcode"
-                            name="passcode"
+                            id="password"
+                            name="password"
                             required
-                            placeholder="Enter your admin passcode"
-                            autoFocus
+                            placeholder="***************"
                             style={{
                                 width: '100%',
                                 padding: '0.85rem 1rem',
